@@ -7,8 +7,8 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Dave_The_Diver.unity
-    guid: 94c7357b578427147934ad21780bd8e1
-  - enabled: 1
+    guid: 526e0c9179c9aaf48915725de6a0b01a
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}
