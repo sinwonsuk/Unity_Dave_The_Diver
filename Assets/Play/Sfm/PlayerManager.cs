@@ -68,7 +68,8 @@ public class PlayerManager : MonoBehaviour
     private void OnDisable()
     {
         fsm.SetState(pSCENE_STATE.Start);
-        transform.position = new Vector3(-14.21837f, 22.78f, -5);
+        transform.localPosition = new Vector3(-14.21837f, 22.78f, -5);
+        virtualCamera.transform.localPosition = new Vector3(-12.21837f, 12.93999f, -10f);
         scene_Change_UI.SetActive(false);
         gameObject.GetComponent<SpriteRenderer>().flipX = false;
        

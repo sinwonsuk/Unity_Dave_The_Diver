@@ -27,6 +27,7 @@ public class Bancho_good : MonoBehaviour
         time = 0;
         big_Small = false;
         audioCheck = false;
+        gameObject.SetActive(false);
     }
 
 

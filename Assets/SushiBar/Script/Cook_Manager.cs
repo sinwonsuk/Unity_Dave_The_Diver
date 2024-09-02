@@ -52,16 +52,16 @@ public class Cook_Manager : MonoBehaviour
         spacePressed = false;
         dave_collision = null;
     }
-   
+
     void ServeSushiToDave()
     {
         //if(collision != null)
         //{
         //    Debug.Log(collision.gameObject.name);
         //}
-     
 
-        if (Input.GetKeyDown(KeyCode.Space) && transform.childCount >= 1 && dave_collision != null && spacePressed==true)
+
+        if (Input.GetKeyDown(KeyCode.Space) && transform.childCount >= 1 && dave_collision != null && spacePressed == true)
         {
 
             AnimatorStateInfo stateInfo = dave_collision.GetComponent<Sushi_Dave>().Get_animatior().GetCurrentAnimatorStateInfo(0);
@@ -69,7 +69,7 @@ public class Cook_Manager : MonoBehaviour
 
             if (stateInfo.IsName("Sushi_Dave_Idle") && transform.GetChild(0).GetComponent<Cook>().Get_fillGauge().fillAmount >= 1)
             {
-               
+
 
                 dave_collision.GetComponent<Sushi_Dave>().Get_animatior().SetTrigger("Change_Serve");
                 dave_Sushi_Give.SetActive(true);
@@ -78,13 +78,14 @@ public class Cook_Manager : MonoBehaviour
                 childindex--;
                 DestroyImmediate(transform.GetChild(0).gameObject);
                 spacePressed = false;
-
-
             }
         }
+        if (Input.GetKeyUp(KeyCode.Space) && spacePressed == false)
+        {
+            spacePressed = true;
+        }
+
     }
-
-
     // Update is called once per frame
     void Update()
     {

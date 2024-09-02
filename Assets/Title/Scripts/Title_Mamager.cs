@@ -16,11 +16,21 @@ public class Title_Mamager : MonoBehaviour
 
     void Change_Animation()
     {
+        if (Pass == animations.Count)
+        {
+            return;
+        }
+
         time += Time.deltaTime;
 
         if (time > 8.0f)
         {
+
+
             int count = animations.Count;
+
+           
+
 
             if (count < Pass)
             {
@@ -31,12 +41,7 @@ public class Title_Mamager : MonoBehaviour
 
             animations[Prev_Pass].SetActive(false);
 
-            if(Pass > 6)
-            {
-                Pass = 6;
-                return;
-            }
-
+           
             animations[Pass].SetActive(true);
 
             Pass++;

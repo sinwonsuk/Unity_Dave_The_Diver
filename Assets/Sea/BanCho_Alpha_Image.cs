@@ -21,7 +21,7 @@ public class BanCho_Alpha_Image : MonoBehaviour
     {
         color = new Color(1, 1, 1, 0);
         check = false;
-
+        gameObject.SetActive(false);
     }
     // Update is called once per frame
     void Update()

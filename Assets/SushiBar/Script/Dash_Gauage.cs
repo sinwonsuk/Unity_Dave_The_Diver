@@ -22,7 +22,7 @@ public class Dash_Gauage : MonoBehaviour
 
     public void gauageDown()
     {
-        image.fillAmount -= Time.deltaTime * 0.1f;
+        image.fillAmount -= Time.deltaTime * 0.3f;
     }
 
     public void GauageUp()

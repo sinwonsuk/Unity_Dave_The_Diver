@@ -8,6 +8,8 @@ public class pase6_Alpha : MonoBehaviour
 
     Image image;
 
+    float time = 0.0f;
+
     float alpha = 1.0f;
 
     bool alpha_Change = false;
@@ -20,6 +22,7 @@ public class pase6_Alpha : MonoBehaviour
     void Start()
     {
         image = GetComponent<Image>();
+        image.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
     }
 
     // Update is called once per frame
@@ -42,10 +45,20 @@ public class pase6_Alpha : MonoBehaviour
         {
             alpha = 0;        
         }
+
         else if(alpha >= 1)
         {
-            Scene_Manager.Getinstance().Change_from_Title_to_sea();
+           
             alpha = 1;
+
+            time += Time.deltaTime;
+
+            if(time > 0.5f)
+            {
+                Scene_Manager.Getinstance().Change_from_Title_to_sea();
+            }
+
+           
         }
 
     }

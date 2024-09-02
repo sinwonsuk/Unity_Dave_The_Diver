@@ -182,7 +182,7 @@ public class Sushi_Inven_Manager : MonoBehaviour
                         {
                             Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.ui_button_click, false);
 
-
+                            input = 0;
                             Destroy(temp);
 
                             on_Off = On_Off.Recipe;
@@ -209,11 +209,11 @@ public class Sushi_Inven_Manager : MonoBehaviour
 
                             Main_Menu_Inputs.Add(main_Menu_Input);
 
-                          
+
+                            input = 0;
 
 
-
-                             on_Off = On_Off.Main_Menu_On;
+                            on_Off = On_Off.Main_Menu_On;
                         }                     
                     }
 

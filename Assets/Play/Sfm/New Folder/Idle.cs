@@ -41,7 +41,7 @@ public class Idle : PlayerState
         time += Time.deltaTime; 
 
 
-        if(dave_Object.transform.position.x > -17.0f && dave_Object.transform.position.x < 52.0f)
+        if(dave_Object.transform.localPosition.x > -17.0f && dave_Object.transform.localPosition.x < 52.0f)
         {
             virtualCamera.Follow = dave_Object.transform;
         }
