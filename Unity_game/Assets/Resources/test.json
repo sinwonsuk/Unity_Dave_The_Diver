@@ -1,0 +1,79 @@
+{
+    "fishlist": [
+        {
+            "picture": "Fish_Image/Clownfish",
+            "name": "ClownFish",
+            "weight": "0.2kg",
+            "rank": "Rank 1",
+            "meat": 2,
+            "count": 21,
+            "price": "20",
+            "happy": "5",
+            "food": "1",
+            "sushi_file_path": "Sushi/Sushi_ClownFish",
+            "sushi_Name": "흰동가리 초밥",
+            "sushi_Level": "Lv.1",
+            "today_count": 0
+        },
+        {
+            "picture": "Fish_Image/Comber",
+            "name": "Comber",
+            "weight": "0.2kg",
+            "rank": "Rank 1",
+            "meat": 2,
+            "count": 4,
+            "price": "15",
+            "happy": "7",
+            "food": "1",
+            "sushi_file_path": "Sushi/Sushi_Comber",
+            "sushi_Name": "콤버 초밥",
+            "sushi_Level": "Lv.1",
+            "today_count": 0
+        },
+        {
+            "picture": "Fish_Image/Ruby_CardinalFish",
+            "name": "Ruby_CardinalFish",
+            "weight": "0.2kg",
+            "rank": "Rank 1",
+            "meat": 2,
+            "count": 1,
+            "price": "12",
+            "happy": "6",
+            "food": "1",
+            "sushi_file_path": "Sushi/Sushi_RubyCardinalFish",
+            "sushi_Name": "지중해카디널피쉬 초밥",
+            "sushi_Level": "Lv.1",
+            "today_count": 0
+        },
+        {
+            "picture": "Fish_Image/Yellow_Tang",
+            "name": "Yellow_Tang",
+            "weight": "0.2kg",
+            "rank": "Rank 1",
+            "meat": 2,
+            "count": 9,
+            "price": "12",
+            "happy": "6",
+            "food": "1",
+            "sushi_file_path": "Sushi/Sushi_YellowTang",
+            "sushi_Name": "옐로우탱 초밥",
+            "sushi_Level": "Lv.1",
+            "today_count": 0
+        },
+        {
+            "picture": "Fish_Image/Smallspotted_dart",
+            "name": "Smallspotted_dart",
+            "weight": "0.5kg",
+            "rank": "Rank 1",
+            "meat": 2,
+            "count": 6,
+            "price": "30",
+            "happy": "4",
+            "food": "1",
+            "sushi_file_path": "Sushi/Sushi_SmallspottedDart",
+            "sushi_Name": "빨판매가리 초밥",
+            "sushi_Level": "Lv.1",
+            "today_count": 0
+        }
+    ]
+}
