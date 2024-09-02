@@ -14722,6 +14722,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5847518caff2c4787fd7ca7ae359db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dave_Transform: {fileID: 1420572761136271542}
+  dave_animator: {fileID: 8783664816286231862}
+  image_fill: {fileID: 3459017797733760979}
 --- !u!1 &4260481843065958682
 GameObject:
   m_ObjectHideFlags: 0
@@ -23409,37 +23412,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &6701359032336959837
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4737627122845838277}
-  m_Layer: 0
-  m_Name: 'LobbyGround_Dredge_02 (Missing Prefab with guid: d68edb2efb8024d46b027894962b5127)'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4737627122845838277
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6701359032336959837}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.38153028, y: -0.19196182, z: -0.5897585}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4871273885789707088}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6705278530265766979
 GameObject:
   m_ObjectHideFlags: 0
@@ -27960,8 +27932,6 @@ MonoBehaviour:
   transformParent: {fileID: 2367980311985816694}
   scroll_View: {fileID: 8457254520416374064}
   scroll: {fileID: 8331944364271055215}
-  bancho_reaction: {fileID: 0}
-  sea_dave: {fileID: 0}
 --- !u!1 &8275742629651696682
 GameObject:
   m_ObjectHideFlags: 0
@@ -31271,3 +31241,65 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5807487973623114693}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &8913008923141997638
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4871273885789707088}
+    m_Modifications:
+    - target: {fileID: 4183334567907651459, guid: d68edb2efb8024d46b027894962b5127, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.38153028
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183334567907651459, guid: d68edb2efb8024d46b027894962b5127, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.19196182
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183334567907651459, guid: d68edb2efb8024d46b027894962b5127, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.5897585
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183334567907651459, guid: d68edb2efb8024d46b027894962b5127, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183334567907651459, guid: d68edb2efb8024d46b027894962b5127, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855694
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183334567907651459, guid: d68edb2efb8024d46b027894962b5127, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183334567907651459, guid: d68edb2efb8024d46b027894962b5127, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183334567907651459, guid: d68edb2efb8024d46b027894962b5127, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183334567907651459, guid: d68edb2efb8024d46b027894962b5127, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183334567907651459, guid: d68edb2efb8024d46b027894962b5127, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186327635995861500, guid: d68edb2efb8024d46b027894962b5127, type: 3}
+      propertyPath: m_Name
+      value: LobbyGround_Dredge_02
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d68edb2efb8024d46b027894962b5127, type: 3}
+--- !u!4 &4737627122845838277 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4183334567907651459, guid: d68edb2efb8024d46b027894962b5127, type: 3}
+  m_PrefabInstance: {fileID: 8913008923141997638}
+  m_PrefabAsset: {fileID: 0}
