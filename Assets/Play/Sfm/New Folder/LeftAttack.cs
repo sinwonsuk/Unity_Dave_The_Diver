@@ -11,7 +11,7 @@ public class LeftAttack : PlayerState
 
     CinemachineVirtualCamera virtualCamera;
 
-    Attack_ready_State_Helper attack_Ready_State_Helper;
+    Attack_ready_State_Helper attack_State_Helper;
 
 
 
@@ -34,7 +34,7 @@ public class LeftAttack : PlayerState
         virtualCamera = _virtualCamera;
 
 
-        attack_Ready_State_Helper = new Attack_ready_State_Helper(_dave_Child_dictory);
+        attack_State_Helper = new Attack_ready_State_Helper(_dave_Child_dictory);
     }
 
 
@@ -60,47 +60,43 @@ public class LeftAttack : PlayerState
         }
 
 
-        virtualCamera.Follow = null;
-        virtualCamera.LookAt = null;
+        // virtualCamera.Follow = null;
+        //virtualCamera.LookAt = null;
 
-
-        Vector3 KnockBack =dave_Object.transform.position - attack_Ready_State_Helper.Get_dave_Attack_Help_Object()["Harpon_Head"].transform.position;
         attack_Time += Time.deltaTime;
 
+        Vector3 KnockBack =dave_Object.transform.position - 
+            attack_State_Helper.Get_dave_Attack_Help_Object()["Harpon_Head"].transform.position;
+    
         if(attack_Time < 0.3f)
         {
-            Attack_Speed += 0.1f;
-
-
-
-
-            virtualCamera.transform.Translate(KnockBack.normalized * Attack_Speed * Time.deltaTime, Space.World);            
-            
-
+            Attack_Speed += 0.1f;                        
             dave_Object.transform.Translate(KnockBack.normalized * Attack_Speed * Time.deltaTime, Space.World);
 
         }
 
  
-         if (attack_Ready_State_Helper.Get_dave_Attack_Help_Object()["Harpon_Head"].GetComponent<Harpoon_Head_Move>().GetFishCheck() == true && attack_Ready_State_Helper.Get_dave_Attack_Help_Object()["Harpon_Head"].GetComponent<Harpoon_Head_Move>().GetMove() == Move.Stop)
+        if (attack_State_Helper.Get_dave_Attack_Help_Object()["Harpon_Head"].GetComponent<Harpoon_Head_Move>().GetFishCheck() == true 
+            && attack_State_Helper.Get_dave_Attack_Help_Object()["Harpon_Head"].GetComponent<Harpoon_Head_Move>().GetMove() == Move.Stop)
         {
-            virtualCamera.GetComponent<DD_Camera>().StartScreenShake(1.8f, 0.15f);                
+            virtualCamera.GetComponent<DD_Camera>().CameraShake_Start();           
             Attack_Speed = 0.0f;
             attack_Time = 0.0f;
             audio_Check = false;
             animator.SetBool("Wait_After_Attack", true);
 
             p_Manager.fsm.SetState(pSCENE_STATE.Wait_After_Attack);
+            return;
         }
 
 
 
-        if (attack_Ready_State_Helper.Get_dave_Attack_Help_Object()["Harpon_Head"].gameObject.GetComponent<Harpoon_Head_Move>().GetStopCheck() == true)
-        {
-          
+        if (attack_State_Helper.Get_dave_Attack_Help_Object()["Harpon_Head"]
+            .gameObject.GetComponent<Harpoon_Head_Move>().GetStopCheck() == true)
+        {         
             Attack_Speed = 0.0f;
             attack_Time = 0.0f;
-            attack_Ready_State_Helper.ChildSetActive_Off();
+            attack_State_Helper.ChildSetActive_Off();
             attack_Move.Set_Stop(false);
             audio_Check = false;
             animator.SetBool("Attack_Ready", false);

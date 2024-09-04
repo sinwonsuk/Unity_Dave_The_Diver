@@ -37,9 +37,7 @@ public class Flock : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        //gameObject.name = Json_Manager.Get_Instance().GetFishList().fishlist[0].name;
-
+    {       
         squareMaxSpeed = maxSpeed * maxSpeed;
         squareNeighborRadius = neighborRadius * neighborRadius;
         squareAvoidanceRadius = squareNeighborRadius * avoidanceRadiusMultiplier * avoidanceRadiusMultiplier;
@@ -47,9 +45,7 @@ public class Flock : MonoBehaviour
         for (int i = 0; i < startingCount; i++)
         {
             Vector2 ad = Random.insideUnitCircle * startingCount * AgentDensity;
-
             transform.position = new Vector3(transform.position.x+ad.x, transform.position.y+ad.y);
-
             FlockAgent newAgent = Instantiate(
                 agentPrefab,
                 transform.position,

@@ -14,17 +14,22 @@ class ScreenShake
 
 public class DD_Camera : MonoBehaviour
 {
+    float time = 0;
+
+    bool left_camera_check = false;
+    bool right_camera_check = false;
 
     Vector3 PrevShackeMovePos = Vector3.zero;
     Vector3 PrevShackeRotationPos = Vector3.zero;
 
     ScreenShake screenShakeValue = new ScreenShake();
     CinemachineVirtualCamera virtualCamera;
-
+    CinemachineBasicMultiChannelPerlin noise;
     // Start is called before the first frame update
     void Start()
     {
         virtualCamera = GetComponent<CinemachineVirtualCamera>();
+        noise = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
     private void OnDisable()
@@ -43,6 +48,7 @@ public class DD_Camera : MonoBehaviour
 
     void UpdateScreenShake(float _deltaTime)
     {
+     
         if (screenShakeValue.elapsed < screenShakeValue.duration)
         {
             // 보다 자연스러운 감쇠를 위해 부드러운 단계 함수를 사용하여 시간이 지남에 따라 흔들림 계수가 1에서 0으로 감소합니다.
@@ -67,7 +73,7 @@ public class DD_Camera : MonoBehaviour
             float offsetX = Mathf.Sin(phase + randomPhaseX) * randomAmplitudeX * swayFactor;
             float offsetY = Mathf.Cos(phase + randomPhaseY) * randomAmplitudeY * swayFactor;
 
-            //float offsetZ = ContentsCore::MainRandom->RandomFloat(-2.0f, 2.0f);
+         
 
             transform.Translate(-PrevShackeMovePos + new Vector3(offsetX, offsetY, 0.0f));
 
@@ -75,8 +81,7 @@ public class DD_Camera : MonoBehaviour
 
             PrevShackeMovePos = new Vector3(offsetX, offsetY, 0.0f);
 
-            //GetMainCamera()->Transform.AddLocalRotation(-PrevShackeRotationPos + float4(0.0f, 0.0f, offsetZ,0.0f));
-            //PrevShackeRotationPos = float4(0.0f, 0.0f, offsetZ, 0.0f);
+          
 
 
             screenShakeValue.elapsed += _deltaTime;
@@ -84,94 +89,67 @@ public class DD_Camera : MonoBehaviour
         else if (PrevShackeMovePos != Vector3.zero)
         {
             transform.Translate(-PrevShackeMovePos);
-            //GetMainCamera()->Transform.AddLocalRotation(-PrevShackeRotationPos);
+          
             PrevShackeMovePos = Vector3.zero;
-            //PrevShackeRotationPos = float4::ZERO;
+          
         }
     }
 
-    public void CameraMove(bool _Check_X, bool _Check_Y,float _speed, FsmClass<pSCENE_STATE> _fsm)
+    public void CameraShake_Start()
+    {       
+        noise.m_AmplitudeGain = 5f;
+        noise.m_FrequencyGain = 80f;    
+    }
+
+    public void CameraShake_Stop()
+    {              
+        noise.m_AmplitudeGain = 0f;
+        noise.m_FrequencyGain = 0f;      
+    }
+
+    public void CameraMove(FsmClass<pSCENE_STATE> _fsm, Transform _daveTransform)
     {
-        if(_Check_X == true && _Check_Y == true)
+        if (_fsm.Getstate.stateType != pSCENE_STATE.Start)
         {
-            return;
+            if (_daveTransform.localPosition.x <= -17.0f)
+            {
+                Vector3 vector3 = _daveTransform.position;
+
+                vector3.x = virtualCamera.transform.position.x;
+                vector3.y = _daveTransform.position.y;
+                vector3.z = -10.0f;
+                virtualCamera.Follow = null;
+                virtualCamera.transform.position = vector3;
+                left_camera_check = true;
+            }
+
+            else if (_daveTransform.localPosition.x > -17.0f && left_camera_check == true)
+            {
+                Vector3 vector3 = _daveTransform.position;
+                vector3.z = -10.0f;
+
+                virtualCamera.transform.position = vector3;
+                virtualCamera.Follow = _daveTransform;
+                left_camera_check = false;
+            }
+
+            if (_daveTransform.localPosition.x >= 52)
+            {
+                Vector3 vector3 = _daveTransform.position;
+
+                vector3.x = virtualCamera.transform.position.x;
+                vector3.y = _daveTransform.position.y;
+                vector3.z = -10.0f;
+                virtualCamera.Follow = null;
+                virtualCamera.transform.position = vector3;
+                right_camera_check = true;
+            }
+
+            else if (_daveTransform.localPosition.x < 52 && right_camera_check == true)
+            {
+                virtualCamera.Follow = _daveTransform;
+                right_camera_check = false;
+            }
         }
-
-        if (_Check_X == false && _Check_Y == false)
-        {
-            
-        }
-
-
-
-
-        if (_fsm.getStateType == pSCENE_STATE.Left_Side_Up_Move && _Check_X == true && _Check_Y ==false)
-        {
-            transform.Translate(Vector3.up * _speed * Time.deltaTime);
-        }
-        if(_fsm.getStateType == pSCENE_STATE.Left_Side_Up_Move && _Check_X == false && _Check_Y == true)
-        {
-            transform.Translate(Vector3.left * _speed * Time.deltaTime);
-        }
-
-        if (_fsm.getStateType == pSCENE_STATE.Left_Side_Down_Move && _Check_X == true && _Check_Y == false)
-        {
-            transform.Translate(Vector3.up * _speed * Time.deltaTime);
-        }
-
-        if (_fsm.getStateType == pSCENE_STATE.Left_Side_Down_Move && _Check_X == false && _Check_Y == true)
-        {
-            transform.Translate(Vector3.up * _speed * Time.deltaTime);
-        }
-
-
-
-        if (_fsm.getStateType == pSCENE_STATE.Left_Side_Down_Move)
-        {
-
-        }
-        if (_fsm.getStateType == pSCENE_STATE.Right_Side_Up_Move)
-        {
-
-        }
-        if (_fsm.getStateType == pSCENE_STATE.Right_Side_Down_Move)
-        {
-           
-        }
-
-
-
-        if (_fsm.getStateType == pSCENE_STATE.Left_Move && _Check_X == true)
-        {
-            
-        }
-        if (_fsm.getStateType == pSCENE_STATE.Right_Move && _Check_X == true)
-        {
-           
-        }
-
-        if (_fsm.getStateType == pSCENE_STATE.Up_Move && _Check_Y == true)
-        {
-
-        }
-
-        if (_fsm.getStateType == pSCENE_STATE.Down_Move && _Check_Y == true)
-        {
-
-        }
-
-
-
-
     }
-    // Update is called once per frame
-
-
-
-    void Update()
-    {
-        UpdateScreenShake(Time.deltaTime);
-    }
-
-
 }
