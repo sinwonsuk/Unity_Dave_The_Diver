@@ -143,7 +143,7 @@ public class PlayerManager : MonoBehaviour
 
         fsm.AddFsm(new LeftAttack(this, gameObject, animator, dave_Child_dictory, attack_Move, virtualCamera));
 
-        fsm.AddFsm(new Wait_After_Attack(this, gameObject, animator, dave_Child_dictory, attack_Move));
+        fsm.AddFsm(new Wait_After_Attack(this, gameObject, animator, dave_Child_dictory, attack_Move, virtualCamera));
 
     }
 
@@ -172,23 +172,9 @@ public class PlayerManager : MonoBehaviour
         previousPosition = transform.position;
     }
 
-
-    // Update is called once per frame
-    void Update()
+    void Dive_Out()
     {
-        breat_time += Time.deltaTime;
-
-        if(breat_time >3.0f)
-        {
-            Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.dave_breathe, false);
-            breat_time = 0;
-        }
-
-
-
-
-
-        if(OutCollision_check ==true)
+        if (OutCollision_check == true)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -199,67 +185,25 @@ public class PlayerManager : MonoBehaviour
                 scene_Change_UI.SetActive(false);
             }
         }
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+        // 사운드 소리 
+        breat_time += Time.deltaTime;
 
-
-
-        if (fsm.Getstate.stateType != pSCENE_STATE.Start )
+        if(breat_time >3.0f)
         {
-            if (transform.localPosition.x <= -17.0f )
-            {
-                Vector3 vector3 = transform.position;
-
-                vector3.x = virtualCamera.transform.position.x;
-                vector3.y = transform.position.y;
-                vector3.z = -10.0f;
-                virtualCamera.Follow = null;
-                virtualCamera.transform.position = vector3;
-                left_camera_check = true;
-            }
-
-            else if (transform.localPosition.x > -17.0f && left_camera_check ==true)
-            {
-                Vector3 vector3 = transform.position;
-                vector3.z = -10.0f;
-
-                virtualCamera.transform.position = vector3;
-                virtualCamera.Follow = transform;
-                left_camera_check = false;
-
-
-            }
-
-
-            if (transform.localPosition.x >= 52)
-            {
-                Vector3 vector3 = transform.position;
-
-                vector3.x = virtualCamera.transform.position.x;
-                vector3.y = transform.position.y;
-                vector3.z = -10.0f;
-                virtualCamera.Follow = null;
-
-                virtualCamera.transform.position = vector3;
-
-                right_camera_check = true;
-            }
-
-            else if (transform.localPosition.x < 52 && right_camera_check == true)
-            {
-                virtualCamera.Follow = transform;
-                right_camera_check = false;
-            }
-
-          
+            Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.dave_breathe, false);
+            breat_time = 0;
         }
 
+        Dive_Out();
 
-       
-
-       // MoveDir();
-
+        virtualCamera.GetComponent<DD_Camera>().CameraMove(fsm,gameObject.transform);
+    
         fsm.Update();
-
 
     }
 }

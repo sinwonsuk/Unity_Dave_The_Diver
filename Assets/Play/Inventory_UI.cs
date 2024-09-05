@@ -22,12 +22,9 @@ public class Inventory_UI : MonoBehaviour
 
     public void Fish_Inventory_Move(Dictionary<string, Fish> _fishDictionary,string name)
     {
-        
-
-
+            
         //Vector3 da = gameObjectsds[0].transform.position;
        
-
         foreach (var fish in _fishDictionary)
         {
            if(fish.Key == name)
