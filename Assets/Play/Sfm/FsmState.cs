@@ -12,27 +12,10 @@ public class FsmState<T> where T : System.Enum
     {
         m_stateType = _stateType;
     }
-
-    public virtual void Enter(FsmMsg _msg)
-    {
-
-    }
-  
+ 
     public virtual void Update()
     {
 
     }
-
-    public virtual void End()
-    {
-
-    }
-
-    public virtual void SetMsg(FsmMsg _msg)
-    { 
-    
-    
-    }
-
 
 }

@@ -49,7 +49,7 @@ public class Attack_ready_State_Helper
     }
 
 
-    public void ChildSetActive_Attack_Ready(bool _check)
+    public void Attack_Ready(bool _check)
     {
         if(_check == true)
         {

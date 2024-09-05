@@ -35,11 +35,6 @@ public class Sushi_Dave_Idle : Sushi_Dave_State
   
 
 
-    public override void Enter(FsmMsg _msg)
-    {
-        base.Enter(_msg);
-    }
-
 
     public override void Update()
     {

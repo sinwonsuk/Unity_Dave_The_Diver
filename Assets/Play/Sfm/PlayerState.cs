@@ -32,9 +32,7 @@ public class PlayerState : FsmState<pSCENE_STATE>
 
     public PlayerState(PlayerManager _sceneManager, pSCENE_STATE _stateType) : base(_stateType)
     {
-        p_Manager = _sceneManager;
-
-       
+        p_Manager = _sceneManager;       
     }
 
 }

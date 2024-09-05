@@ -115,9 +115,9 @@ public class PlayerManager : MonoBehaviour
 
     public void Init()
     {
-        fsm.AddFsm(new Dive(this, gameObject, animator, virtualCamera));
+        fsm.AddFsm(new Dive(this, animator, virtualCamera));
 
-        fsm.AddFsm(new Idle(this, gameObject, animator, virtualCamera, dave_Child_dictory));
+        fsm.AddFsm(new Idle(this, animator, virtualCamera, dave_Child_dictory));
 
         fsm.AddFsm(new Left_Move(this, gameObject, animator, dave_Child_dictory,controller,speed));
 

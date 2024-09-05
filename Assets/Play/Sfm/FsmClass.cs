@@ -12,7 +12,6 @@ public class FsmClass<T> where T : System.Enum
 
     public T getStateType
     {
-
         get
         {
             if (m_state == null)
@@ -35,10 +34,7 @@ public class FsmClass<T> where T : System.Enum
     }
     
     public virtual void AddFsm(FsmState<T> _state)
-    {
-        
-
-
+    {       
         if (null == _state)
         {
             Debug.LogError("FsmClass::AddFsm()[null == FsmState<T>]");
@@ -62,12 +58,7 @@ public class FsmClass<T> where T : System.Enum
 
         FsmState<T> nextState = m_stateList[_stateType];
 
-        //if(nextState == m_state)
-        //{
-        //    Debug.LogError("FsmClass::SetState()[Same state :]" + _stateType);
-
-        //}
-
+      
         if(m_isStateChanging ==true)
         {
             Debug.LogError("FsmClass::SetState()[m_isStateChanging : ]" + _stateType);
@@ -77,13 +68,10 @@ public class FsmClass<T> where T : System.Enum
 
         m_isStateChanging = true;
 
-        if(null != m_state)
-        {
-            m_state.End();
-        }
+    
 
         m_state = nextState;
-        m_state.Enter(_msg);
+       
 
         m_isStateChanging = false;
     }
@@ -100,7 +88,7 @@ public class FsmClass<T> where T : System.Enum
             return;
         }
 
-        m_state.SetMsg(_msg);
+
     }
 
 

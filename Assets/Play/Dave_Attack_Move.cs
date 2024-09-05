@@ -54,8 +54,6 @@ public class Dave_Attack_Move : MonoBehaviour
             {
 
                 transform.Rotate(-Vector3.forward * rotateSpeed * Time.deltaTime);
-
-
             }
             if (prevMousePos.y == Input.mousePosition.y)
             {

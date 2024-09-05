@@ -7,12 +7,13 @@ public class LeftAttack_Ready : PlayerState
 {
     bool audio_Check = false;
 
-    Dave_Attack_Move attack_Move;
+    Dave_Attack_Move attack_Rotation_Move;
 
     CinemachineVirtualCamera virtualCamera;
 
     Attack_ready_State_Helper attack_Ready_State_Helper;
 
+    float camera_speed = 15.0f;
 
    
     
@@ -22,19 +23,13 @@ public class LeftAttack_Ready : PlayerState
         dave_Object = _gameObject;
         animator = _animator;
       
-        attack_Move = _attack_Move;
+        attack_Rotation_Move = _attack_Move;
         virtualCamera = _camera;
 
         attack_Ready_State_Helper = new Attack_ready_State_Helper(_dave_Child_dictory);
     }
 
 
-
-
-    public override void Enter(FsmMsg _msg)
-    {
-        base.Enter(_msg);
-    }
 
 
 
@@ -51,15 +46,11 @@ public class LeftAttack_Ready : PlayerState
         Time.timeScale = 0.5f;
 
 
-
-        base.Update();
-
         dave_Object.GetComponent<SpriteRenderer>().flipX = true;
 
         if (virtualCamera.m_Lens.FieldOfView > 60.0)
-        {
-            //러프를 써야 할까 
-            virtualCamera.m_Lens.FieldOfView -= Time.deltaTime * 15.0f;
+        { 
+            virtualCamera.m_Lens.FieldOfView -= Time.deltaTime * camera_speed;
         }
 
         if (Input.GetMouseButtonUp(1))
@@ -74,8 +65,8 @@ public class LeftAttack_Ready : PlayerState
 
         if (Input.GetMouseButtonDown(0))
         {
-            attack_Ready_State_Helper.ChildSetActive_Attack_Ready(false);         
-            attack_Move.Set_Stop(true);
+            attack_Ready_State_Helper.Attack_Ready(false);         
+            attack_Rotation_Move.Set_Stop(true);
             Time.timeScale = 1.0f;
             audio_Check = false;
             p_Manager.fsm.SetState(pSCENE_STATE.Left_Attack);

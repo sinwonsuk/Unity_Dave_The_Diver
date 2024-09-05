@@ -17,10 +17,6 @@ public class Left_SideMoveDown : PlayerState
         speed = _speed;
     }
 
-    public override void Enter(FsmMsg _msg)
-    {
-        base.Enter(_msg);
-    }
 
 
 

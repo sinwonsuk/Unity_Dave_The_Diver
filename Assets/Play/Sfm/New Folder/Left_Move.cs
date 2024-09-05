@@ -8,7 +8,7 @@ public class Left_Move : PlayerState
 
     Attack_ready_State_Helper attack_Ready_State_Helper;
 
-    CharacterController controller;
+    CharacterController character_Controller;
 
     float speed = 0.0f;
 
@@ -18,15 +18,11 @@ public class Left_Move : PlayerState
         dave_Object = _gameObject;
         animator = _animator;
         attack_Ready_State_Helper = new Attack_ready_State_Helper(_dave_Child_dictory);
-        controller = _controller;
+        character_Controller = _controller;
 
         speed = _speed;
     }
 
-    public override void Enter(FsmMsg _msg)
-    {
-        base.Enter(_msg);
-    }
 
 
 
@@ -38,12 +34,13 @@ public class Left_Move : PlayerState
 
         animator.SetBool("Side_Moving", true);
 
+
         float moveX = Input.GetAxis("Horizontal");
         float moveY = Input.GetAxis("Vertical");
 
         Vector3 move = new Vector3(moveX, moveY);
 
-        controller.Move(move * speed * Time.deltaTime);
+        character_Controller.Move(move * speed * Time.deltaTime);
 
 
 
@@ -86,7 +83,7 @@ public class Left_Move : PlayerState
             dave_Object.transform.rotation = Quaternion.Euler(0, 0, 0);
             animator.SetBool("Side_Moving", false);
             animator.SetBool("Attack_Ready", true);
-            attack_Ready_State_Helper.ChildSetActive_Attack_Ready(true);
+            attack_Ready_State_Helper.Attack_Ready(true);
             p_Manager.fsm.SetState(pSCENE_STATE.Left_Attack_Ready);
             return;
            

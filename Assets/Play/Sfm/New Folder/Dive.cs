@@ -15,18 +15,13 @@ public class Dive : PlayerState
 
     float time = 0;
 
-    public Dive(PlayerManager _sceneManager, GameObject _gameObject, Animator _animator, CinemachineVirtualCamera _virtualCamera) : base(_sceneManager,pSCENE_STATE.Start)
+    public Dive(PlayerManager _sceneManager, Animator _animator, CinemachineVirtualCamera _virtualCamera) : base(_sceneManager,pSCENE_STATE.Start)
     {
-        dave_Object = _gameObject;
+        dave_Object = _sceneManager.gameObject;
         animator = _animator;
         StartPos = dave_Object.transform.position;
 
         virtualCamera = _virtualCamera;
-    }
-
-    public override void Enter(FsmMsg _msg)
-    {
-        base.Enter(_msg);
     }
 
 
@@ -59,6 +54,8 @@ public class Dive : PlayerState
             virtualCamera.Follow = dave_Object.transform;
 
             p_Manager.fsm.SetState(pSCENE_STATE.Idle);
+
+
         }
     }
 

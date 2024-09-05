@@ -17,11 +17,6 @@ public class Right_SideMoveUp : PlayerState
         speed = _speed;
     }
 
-    public override void Enter(FsmMsg _msg)
-    {
-        base.Enter(_msg);
-    }
-
 
 
 

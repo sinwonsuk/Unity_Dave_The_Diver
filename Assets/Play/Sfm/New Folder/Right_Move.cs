@@ -24,13 +24,7 @@ public class Right_Move : PlayerState
         speed = _speed;
     }
 
-    public override void Enter(FsmMsg _msg)
-    {
-        base.Enter(_msg);
-    }
-
-    
-
+ 
 
     public override void Update()
     {
@@ -81,7 +75,7 @@ public class Right_Move : PlayerState
             dave_Object.GetComponent<SpriteRenderer>().flipX = false;
             animator.SetBool("Side_Moving", false);
             animator.SetBool("Attack_Ready", true);
-            attack_Ready_State_Helper.ChildSetActive_Attack_Ready(true);
+            attack_Ready_State_Helper.Attack_Ready(true);
             p_Manager.fsm.SetState(pSCENE_STATE.Right_Attack_Ready);
             return;
         }

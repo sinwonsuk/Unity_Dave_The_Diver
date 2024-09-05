@@ -33,12 +33,6 @@ public class Sushi_Dave_Move : Sushi_Dave_State
 
     }
 
-    public override void Enter(FsmMsg _msg)
-    {
-        base.Enter(_msg);
-    }
-
-    
 
 
 

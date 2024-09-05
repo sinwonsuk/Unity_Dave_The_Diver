@@ -18,9 +18,9 @@ public class Idle : PlayerState
 
     float time = 0.0f;
 
-    public Idle(PlayerManager _sceneManager, GameObject _gameObject, Animator _animator, CinemachineVirtualCamera _cam, Dictionary<string, GameObject> _dave_Child_dictory) : base(_sceneManager, pSCENE_STATE.Idle)
+    public Idle(PlayerManager _sceneManager,Animator _animator, CinemachineVirtualCamera _cam, Dictionary<string, GameObject> _dave_Child_dictory) : base(_sceneManager, pSCENE_STATE.Idle)
     {
-        dave_Object = _gameObject;
+        dave_Object = _sceneManager.gameObject;
         animator = _animator;
         virtualCamera = _cam;
        
@@ -29,10 +29,6 @@ public class Idle : PlayerState
 
     }
 
-    public override void Enter(FsmMsg _msg)
-    {
-        base.Enter(_msg);
-    }
 
 
     public override void Update()
@@ -131,7 +127,7 @@ public class Idle : PlayerState
 
                 animator.SetBool("Attack_Ready", true);
 
-                attack_Ready_State_Helper.ChildSetActive_Attack_Ready(true);
+                attack_Ready_State_Helper.Attack_Ready(true);
                 p_Manager.fsm.SetState(pSCENE_STATE.Left_Attack_Ready);
                 return;
             }
@@ -147,7 +143,7 @@ public class Idle : PlayerState
                 dave_Object.GetComponent<SpriteRenderer>().flipX = false;
 
                 animator.SetBool("Attack_Ready", true);
-                attack_Ready_State_Helper.ChildSetActive_Attack_Ready(true);
+                attack_Ready_State_Helper.Attack_Ready(true);
                 p_Manager.fsm.SetState(pSCENE_STATE.Right_Attack_Ready);
                 return;
             }

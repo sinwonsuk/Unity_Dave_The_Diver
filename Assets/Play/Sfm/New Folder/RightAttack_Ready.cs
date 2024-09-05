@@ -30,12 +30,7 @@ public class RightAttack_Ready : PlayerState
 
 
 
-    public override void Enter(FsmMsg _msg)
-    {
-        base.Enter(_msg);
-    }
-
-
+  
 
 
 
@@ -72,7 +67,7 @@ public class RightAttack_Ready : PlayerState
         {
             Time.timeScale = 1.0f;
             //gameObjects[3].GetComponent<LineRenderer>().enabled = true;
-            attack_Ready_State_Helper.ChildSetActive_Attack_Ready(false);
+            attack_Ready_State_Helper.Attack_Ready(false);
             attack_Move.Set_Stop(true);
             audio_Check = false;
             p_Manager.fsm.SetState(pSCENE_STATE.Right_Attack);
