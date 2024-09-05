@@ -8,6 +8,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
+using static Json_Manager;
 
 
 
@@ -15,35 +16,21 @@ using UnityEngine.UI;
 public class Slot : MonoBehaviour
 {
 
-
-
-
-
-   
-
-    public void Information_Send(Dictionary<string, Json_Manager.Fish> _fishDictionary, string name)
+    public GameObject Create_Prefab(Dictionary<string, Json_Manager.Fish> _fishDictionary, string name,Transform _transform)
     {
-        foreach (var fish in _fishDictionary)
+        if(_fishDictionary.ContainsKey(name))                
         {
-            if(fish.Key == name)
-            {
-                transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = fish.Value.name;
-                transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = fish.Value.rank;
-                transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = fish.Value.meat.ToString();
-                transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = fish.Value.weight;
-                fish.Value.count += 1;
-                fish.Value.today_count += 1;
-                transform.GetChild(4).GetComponent<Image>().sprite = Resources.Load<Sprite>(fish.Value.picture);
-
-                string jsonData = JsonUtility.ToJson(Json_Manager.Get_Instance().GetFishList(),true);
-                string path = Path.Combine(Application.dataPath+ "/Resources", "test.json");
-                File.WriteAllText(path, jsonData);
-
-            }
-
+            transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _fishDictionary[name].name;
+            transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _fishDictionary[name].rank;
+            transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = _fishDictionary[name].meat.ToString();
+            transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = _fishDictionary[name].weight;
+            _fishDictionary[name].count += 1;
+            _fishDictionary[name].today_count += 1;
+            transform.GetChild(4).GetComponent<Image>().sprite = Resources.Load<Sprite>(_fishDictionary[name].picture);
+            return Instantiate(gameObject, _transform);
         }
-
-
+      
+        return null;
     }
 
 

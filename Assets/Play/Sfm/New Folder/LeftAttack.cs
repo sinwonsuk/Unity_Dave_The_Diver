@@ -56,14 +56,7 @@ public class LeftAttack : PlayerState
         }
 
 
-        //virtualCamera.Follow = null;
-        //virtualCamera.LookAt = null;
-
-
-        Vector3 KnockBack =dave_Object.transform.position - attack_State_Helper.Get_dave_Attack_Help_Object()["Harpon_Head"].transform.position;
-
-        // virtualCamera.Follow = null;
-        //virtualCamera.LookAt = null;
+        
 
         attack_Time += Time.deltaTime;
 

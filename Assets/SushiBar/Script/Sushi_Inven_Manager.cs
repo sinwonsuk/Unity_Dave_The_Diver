@@ -18,8 +18,6 @@ public enum On_Off
     Recipe_Off,
     Menu_Add,
     Recipe_Add_Off,
-
-
 }
 
 public class Sushi_Inven_Manager : MonoBehaviour
@@ -101,10 +99,7 @@ public class Sushi_Inven_Manager : MonoBehaviour
                         Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.ui_button_click, false);
                         menuMove.MainMove_Off();
                         on_Off = On_Off.Main_Menu_Off;
-                    }
-
-                   
-
+                    }                  
                     for (int i = 0; i < Main_Menu_Inputs.Count; i++)
                     {               
                         if (Main_Menu_Inputs[i] == main_Menu_Input)
@@ -129,10 +124,6 @@ public class Sushi_Inven_Manager : MonoBehaviour
                             Check = true;
                         }
                     }
-
-
-
-
                 }
                 break;
             case On_Off.Recipe:
@@ -225,26 +216,11 @@ public class Sushi_Inven_Manager : MonoBehaviour
             default:
                 break;
         }
-
-
-
-
-
-
-
-      
-
-       
-
-
-
-
     }
 
     void Controll()
     {
-        
-
+       
         if (Input.GetKeyDown(KeyCode.D))
         {
             input += 1;
@@ -319,8 +295,6 @@ public class Sushi_Inven_Manager : MonoBehaviour
         {
             Destroy(prefab[i]);
         }
-
-
         prefab.Clear();
         prefab = new List<GameObject>();
         Main_Menu_Inputs.Clear();

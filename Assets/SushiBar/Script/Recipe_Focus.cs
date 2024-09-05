@@ -38,9 +38,9 @@ public class Recipe_Focus : MonoBehaviour
             return;
         }
 
-        if (input+ CountY*4 > Json_Manager.Get_Instance().GetFishList().fishlist.Length-1)
+        if (input+ CountY*4 > Json_Manager.Get_Instance().GetFishList().fishlist_array.Length-1)
         {
-            input = Json_Manager.Get_Instance().GetFishList().fishlist.Length-1;
+            input = Json_Manager.Get_Instance().GetFishList().fishlist_array.Length-1;
 
             input-= CountY*4;
 

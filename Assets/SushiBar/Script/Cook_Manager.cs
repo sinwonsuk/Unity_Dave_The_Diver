@@ -54,23 +54,13 @@ public class Cook_Manager : MonoBehaviour
     }
 
     void ServeSushiToDave()
-    {
-        //if(collision != null)
-        //{
-        //    Debug.Log(collision.gameObject.name);
-        //}
-
-
+    {    
         if (Input.GetKeyDown(KeyCode.Space) && transform.childCount >= 1 && dave_collision != null && spacePressed == true)
         {
-
             AnimatorStateInfo stateInfo = dave_collision.GetComponent<Sushi_Dave>().Get_animatior().GetCurrentAnimatorStateInfo(0);
-
 
             if (stateInfo.IsName("Sushi_Dave_Idle") && transform.GetChild(0).GetComponent<Cook>().Get_fillGauge().fillAmount >= 1)
             {
-
-
                 dave_collision.GetComponent<Sushi_Dave>().Get_animatior().SetTrigger("Change_Serve");
                 dave_Sushi_Give.SetActive(true);
                 dave_collision.GetComponent<Sushi_Dave>().Set_Sushi_Path(transform.GetChild(0).GetComponent<Cook>().Get_sushiPath());
@@ -92,10 +82,6 @@ public class Cook_Manager : MonoBehaviour
 
         ServeSushiToDave();
 
-
-
-
-
         if (childindex == transform.childCount)
         {
             Audio_Manager.GetInstance().Sfx_Stop(Audio_Manager.sfx.effect_chopping_board);
@@ -109,10 +95,9 @@ public class Cook_Manager : MonoBehaviour
             Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.effect_chopping_board, true);
             audio_Check = true;
         }
-        banCho.SetBool("Work", true);
-       
 
-       
+        banCho.SetBool("Work", true);
+             
         if(transform.childCount > 0)
         {
             transform.GetChild(childindex).GetComponent<Cook>().cook_FillAmount();

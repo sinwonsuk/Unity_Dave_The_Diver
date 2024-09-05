@@ -9,7 +9,7 @@ public class Fish_Manager : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            transform.GetChild(i).gameObject.name = Json_Manager.Get_Instance().GetFishList().fishlist[i].name;
+            transform.GetChild(i).gameObject.name = Json_Manager.Get_Instance().GetFishList().fishlist_array[i].name;
         }
 
     }

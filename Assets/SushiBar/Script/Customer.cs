@@ -10,7 +10,7 @@ public class Customer : MonoBehaviour
 
     public customer_Seat_Function customer_Seat_function;
 
-    GameObject collision;
+    GameObject dave;
     enum Customer_State
     {
         Move,
@@ -97,7 +97,7 @@ public class Customer : MonoBehaviour
     {
         if(_collision.gameObject.tag == "Player")
         {
-            collision = _collision.gameObject;
+            dave = _collision.gameObject;
             spacebar_Check = true;           
         }       
     }
@@ -106,7 +106,7 @@ public class Customer : MonoBehaviour
     {
         if (_collision.gameObject.tag == "Player")
         {
-            collision = null;
+            dave = null;
             spacebar_Check = false;
         }
     }
@@ -114,8 +114,6 @@ public class Customer : MonoBehaviour
 
     public void Make_Prefab(Transform ins_transform, RectTransform _Seat_transforms, List<GameObject> _menus,Transform _cook_Transform_Parent, int _Seat, customer_Seat_Function _customer_Seat_function)
     {
-
-
 
         GameObject customer = Instantiate(gameObject, ins_transform);
 
@@ -146,24 +144,17 @@ public class Customer : MonoBehaviour
     {
         if (one_Check == false)
         {
+            // 초기화 과정 
             one_Check = true;
 
-            arr = new int[menus.Count];
+           
 
-            for (int i = 0; i < arr.Length; i++)
-            {
-                arr[i] = -1;
-            }
-
-
-            //  메뉴 count가 전부 0인지 체크 
+            //  메뉴들의 메뉴 개수가 전부 0개인지 확인하는 과정 
 
             for (int i = 0; i < menus.Count; i++)
             {
                 if (menus[i].Get_count() == 0)
-                {
-                    // 매뉴 인덱스 값 순서대로 저장 
-                    arr[menu_Count_Check] = i;
+                {                   
                     menu_Count_Check++;
                 }
             }
@@ -174,46 +165,26 @@ public class Customer : MonoBehaviour
                 return;
             }
 
-
-
             while (true)
             {
-
-
-
-                // 매뉴의 인덱스 랜덤으로 값 가져오기 
+                // 매뉴들의 인덱스 랜덤(메뉴종류)으로 값 가져오기 
 
                 menuindex = Random.Range(0, menus.Count);
 
-                //arr의 매뉴 개수가 0인것들 저장해둠
 
-
-                for (int i = 0; i < arr.Length; i++)
+                if (menus[menuindex].Get_count() == 0)
                 {
-
-
-                    if (arr[i] == menuindex)
-                    {
-                        break;
-                    }
-
-                    arr_index++;
+                    continue;
                 }
-
-                //통과 
-                if (arr_index == arr.Length)
+                
+                //통과               
                 {
                     sushi_Sprite.sprite = Resources.Load<Sprite>(menus[menuindex].Get_sushi_path());
                     menus[menuindex].Set_Mus_count(1);
                     menus[menuindex].Get_text_Count().text = menus[menuindex].Get_count().ToString();
                     break;
                 }
-                // 다시 
-                else
-                {
-                    arr_index = 0;
-                }
-
+               
             }
         }
     }
@@ -235,47 +206,30 @@ public class Customer : MonoBehaviour
         }
     }
 
-        // Update is called once per frame
+      
         void Update()
         {
-           if (spacebar_Check == true && Input.GetKeyDown(KeyCode.Space) && collision != null)
+           if (spacebar_Check == true && Input.GetKeyDown(KeyCode.Space) && dave != null)
            {
-              AnimatorStateInfo stateInfo = collision.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+              AnimatorStateInfo stateInfo = dave.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
 
             if (stateInfo.IsName("Sushi_Dave_Serve_Idle") && state == Customer_State.Wait)
             {
                 Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.sushi_customer_served, false);
 
-                if (collision.gameObject.GetComponent<Sushi_Dave>().Get_Sushi_Path() == "Sushi/Sushi_Gim")
+                if (dave.gameObject.GetComponent<Sushi_Dave>().Get_Sushi_Path() == "Sushi/Sushi_Gim" ||
+                    dave.gameObject.GetComponent<Sushi_Dave>().Get_Sushi_Path() == menus[menuindex].Get_sushi_path())
                 {
                     Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.sushi_customer_eat, false);
                     state = Customer_State.Eat;
                     animator.SetTrigger("Eat");
-                    collision.gameObject.GetComponent<Sushi_Dave>().Get_animatior().SetTrigger("Back_Idle");
-                    collision.transform.Find("Sushi_Give").gameObject.SetActive(false);
+                    dave.gameObject.GetComponent<Sushi_Dave>().Get_animatior().SetTrigger("Back_Idle");
+                    dave.transform.Find("Sushi_Give").gameObject.SetActive(false);
                     Sushi_Info.SetActive(false);
-                }
-                else if (collision.gameObject.GetComponent<Sushi_Dave>().Get_Sushi_Path() == menus[menuindex].Get_sushi_path())
-                {
-                    Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.sushi_customer_eat, false);
-                    state = Customer_State.Eat;
-                    animator.SetTrigger("Eat");
-                    collision.gameObject.GetComponent<Sushi_Dave>().Get_animatior().SetTrigger("Back_Idle");
-                    collision.transform.Find("Sushi_Give").gameObject.SetActive(false);
-                    Sushi_Info.SetActive(false);
-                }
-
+                }              
             }
-
-
            }  
-
-
-        
-
-
-
-       
+         
             switch (state)
             {
                 case Customer_State.Move:
@@ -326,10 +280,6 @@ public class Customer : MonoBehaviour
                     break;
                 case Customer_State.Wait:
                     {
-
-
-
-
                         wait_gauge.fillAmount += Time.deltaTime*0.05f;
 
                         if (wait_gauge.fillAmount >= 1)
@@ -370,14 +320,7 @@ public class Customer : MonoBehaviour
 
 
                     if (time > 2.5)
-                    {
-                        
-
-                      
-
-
-
-
+                    {                       
                         time = 0;
                         state = Customer_State.BackMove;
                         animator.SetTrigger("Back_Move");
@@ -392,40 +335,20 @@ public class Customer : MonoBehaviour
 
                     if (time >= 2)
                     {
-                       
-
-
+                      
                         time = 0;
                         state = Customer_State.BackMove;
                         animator.SetBool("Anger", false);                       
                     }
-
-
-
-
-
-
-
-
-
-
                 }
                 break;
                 case Customer_State.BackMove:
                 {
                     if(seat_Check ==false)
                     {
-                        customer_Seat_function(seat);
-                       
-
-                       
-
+                        customer_Seat_function(seat);                                           
                         seat_Check = true;
-                    }
-                  
-
-                   
-
+                    }                                   
                     time += Time.deltaTime;
                     rectTransform.localScale = new Vector3(-1, 1, 1);
                     rectTransform.Translate(Vector2.left * Speed * Time.deltaTime);
@@ -434,24 +357,11 @@ public class Customer : MonoBehaviour
                     {
                         Destroy(gameObject);
                     }
-
-                 
-                    
-
-
-
                 }
                     break;
-
-
-
                 default:
                     break;
             }
-
-
-
-
         }
 
     internal void Make_Prefab(Transform transform, RectTransform rectTransform, List<GameObject> menus, Transform cook_Transform_Parent, int seat, object v)

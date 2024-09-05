@@ -32,7 +32,7 @@ public class AvoidanceBehavior : FilteredFlockBehavior
 
 
 
-
+                                                                                // 애를 키우면 더 빠르게 벗어나겠네 원이 커지는 개념
             if (Vector2.SqrMagnitude(NearestPoint - agent.transform.position) < flock.SquareAvoidanceRadius)
             {
                 nAvoid++;

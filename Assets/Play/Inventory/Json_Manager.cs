@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Text;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Json_Manager : MonoBehaviour
@@ -12,7 +13,12 @@ public class Json_Manager : MonoBehaviour
     private static Json_Manager json_Manager_Instance = null;
 
     public static Json_Manager Get_Instance()
-    {
+    {     
+        if(json_Manager_Instance == null)
+        {
+            json_Manager_Instance= FindObjectOfType<Json_Manager>();
+        }
+
         return json_Manager_Instance;
     }
 
@@ -36,12 +42,10 @@ public class Json_Manager : MonoBehaviour
         public int today_count;
     }
         
-
-
     [System.Serializable]
     public class FishList
     {
-        public Fish[] fishlist;
+        public Fish[] fishlist_array;
         public Dictionary<string, Fish> fishDictionary = new Dictionary<string, Fish>();
     }
 
@@ -49,10 +53,7 @@ public class Json_Manager : MonoBehaviour
 
     FishList fishlist = new FishList();
 
-    
-
    
-
     public FishList GetFishList()
     {    
         return fishlist;    
@@ -63,38 +64,11 @@ public class Json_Manager : MonoBehaviour
         json_Manager_Instance = this;
 
         fishlist = JsonUtility.FromJson<FishList>(asset.text);
-
-       
-
-        for (int i = 0; i < fishlist.fishlist.Length; i++)
+     
+        for (int i = 0; i < fishlist.fishlist_array.Length; i++)
         {
-            fishlist.fishDictionary.Add(fishlist.fishlist[i].name, fishlist.fishlist[i]);
-        }
-
-        
+            fishlist.fishDictionary.Add(fishlist.fishlist_array[i].name, fishlist.fishlist_array[i]);
+        }       
     }
 
-    public void Start()
-    {
-       
-
-
-
-        //FileStream Stream = new FileStream(Application.dataPath + "/test.json", FileMode.Open);
-        //byte[] date = new byte[Stream.Length];
-        //Stream.Read(date, 0, date.Length);
-        //Stream.Close();
-        //string jsondate = Encoding.UTF8.GetString(date);
-        //fish = JsonConvert.DeserializeObject<Fish_Manager>(jsondate);
-
-       
-
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

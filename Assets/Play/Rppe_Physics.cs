@@ -41,7 +41,7 @@ public class Rope_Physics : MonoBehaviour
         {
             segments.Add(new Segment(segmentPos));
 
-            segmentPos.y -= segmentLength;
+            segmentPos.x -= segmentLength;
         }
     }
 
@@ -53,7 +53,7 @@ public class Rope_Physics : MonoBehaviour
 
         for (int i = 0; i < constraintLoop; i++)
         {
-            ApplyConstraint();
+           //ApplyConstraint();
             AdjustCollision();
         }     
 
@@ -67,6 +67,7 @@ public class Rope_Physics : MonoBehaviour
     {
         lineRenderer.startWidth = ropeWidth;
         lineRenderer.endWidth = ropeWidth;
+
         Vector3[] segementPositions = new Vector3[segments.Count];
         Vector2[] colliderPositions = new Vector2[segments.Count];
         for (int i = 0; i < segments.Count; i++)
@@ -109,6 +110,7 @@ public class Rope_Physics : MonoBehaviour
 
 
         segments[segments.Count-1].position = endTransform.position;
+
         for (int i = 0; i < segments.Count-1; i++)
         {
             float distance = (segments[i].position - segments[i + 1].position).magnitude;
@@ -136,18 +138,18 @@ public class Rope_Physics : MonoBehaviour
     }
     private void AdjustCollision()
     {
-        for (int i = 0; i < segments.Count; i++)
-        {
-            Vector2 dir = segments[i].position - segments[i].previousPos;
+        //for (int i = 0; i < segments.Count; i++)
+        //{
+        //    Vector2 dir = segments[i].position - segments[i].previousPos;
 
-            RaycastHit2D hit = Physics2D.CircleCast(segments[i].position, ropeWidth * 0.5f, dir.normalized, 0f);
+        //    RaycastHit2D hit = Physics2D.CircleCast(segments[i].position, ropeWidth * 0.5f, dir.normalized, 0f);
 
-            if(hit)
-            {
-                segments[i].position = hit.point + hit.normal * ropeWidth * 0.5f;
-                segments[i].previousPos = segments[i].position;
-            }
-        }
+        //    if(hit)
+        //    {
+        //        segments[i].position = hit.point + hit.normal * ropeWidth * 0.5f;
+        //        segments[i].previousPos = segments[i].position;
+        //    }
+        //}
     }
 
     public class Segment

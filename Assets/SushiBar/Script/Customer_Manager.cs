@@ -181,8 +181,6 @@ public class Customer_Manager : MonoBehaviour
 
     void Random_Customer_Prefab()
     {
-
-
         if (random_Check == false)
         {
             random_Customer_Count = Random.Range(1, 3);
@@ -199,6 +197,7 @@ public class Customer_Manager : MonoBehaviour
         if (random_Customer_Prefab_time > 1)
         {
             random_Customer_Prefab_time = 0;
+
             Randoms++;
             if (customer_Seat() == true)
             {
@@ -207,12 +206,8 @@ public class Customer_Manager : MonoBehaviour
         }
     }
 
-
-
-    // Update is called once per frame
-    void Update()
+    void close()
     {
-
         if (sushi_Bar_Time_Check.time > 0.38f)
         {
             int temp = 0;
@@ -225,38 +220,41 @@ public class Customer_Manager : MonoBehaviour
                 }
             }
 
-            if (temp == on_Seat.Length && close_Check ==false)
+            if (temp == on_Seat.Length && close_Check == false)
             {
                 close_Start.SetActive(true);
                 close_Check = true;
 
             }
-
-
         }
 
+    }
 
-
-        if (sushi_Bar_Time_Check.time > 0.3f)
-        {
-           
-            return;
-        }
-
-
+    void Customer_Come_Time()
+    {
         customer_come_time += Time.deltaTime;
 
-        Random_Customer_Prefab();
-
-
-        if (customer_come_time > 5)
+        if (customer_come_time > 7)
         {
             customer_come_time = 0;
             Randoms = 0;
             random_Check = false;
             random_Customer_Prefab_time = 0;
-          
-        }
 
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        close();
+
+        if (sushi_Bar_Time_Check.time > 0.3f)
+        {        
+            return;
+        }
+      
+        Random_Customer_Prefab();
+        Customer_Come_Time();
     }
 }
