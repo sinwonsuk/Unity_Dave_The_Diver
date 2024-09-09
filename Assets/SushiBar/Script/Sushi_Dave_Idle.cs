@@ -22,13 +22,8 @@ public class Sushi_Dave_Idle : Sushi_Dave_State
     {
         animator = _animator;
         dave = _dave;
-
         dave_Flip = new Dave_Flip(_dave);
-
-
         dash_Gauage = _dash_Gauage;
-
-
 
     }
 

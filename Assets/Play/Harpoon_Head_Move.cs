@@ -123,8 +123,7 @@ public class Harpoon_Head_Move : MonoBehaviour
         if (fishCheck == false && collision.gameObject.tag == "Wall" && move == Move.Go)
         {
             Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.harpoon_pump_shot, false);
-            Dir = transform.position- transform.parent.position;
-            //Dir.y *= -1;
+            Dir = transform.position- transform.parent.position;        
             speed = 20.0f;
             WallCheck = true;
 
@@ -148,14 +147,7 @@ public class Harpoon_Head_Move : MonoBehaviour
 
         if(fishCheck ==true && fish != null)
         {
-            Vector3 moveDir = fish.transform.position - transform.position;
-
-            fish.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
-
-          
-
-
-
+            fish.transform.position = gameObject.transform.position;
         }
 
 

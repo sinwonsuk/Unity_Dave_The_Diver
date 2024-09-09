@@ -25,13 +25,8 @@ public class Title_Mamager : MonoBehaviour
 
         if (time > 8.0f)
         {
-
-
             int count = animations.Count;
-
            
-
-
             if (count < Pass)
             {
                 return;
@@ -40,8 +35,7 @@ public class Title_Mamager : MonoBehaviour
             int Prev_Pass = Pass-1;
 
             animations[Prev_Pass].SetActive(false);
-
-           
+        
             animations[Pass].SetActive(true);
 
             Pass++;

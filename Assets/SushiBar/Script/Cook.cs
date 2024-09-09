@@ -7,10 +7,6 @@ public class Cook : MonoBehaviour
     [SerializeField]
     Image fillGauge;
 
-
-
-
-
     [SerializeField]
     Image sushi_Sprite;
 
@@ -56,11 +52,8 @@ public class Cook : MonoBehaviour
 
             if (fillGauge.fillAmount >= 1)
             {
-                cooking_Box.sprite = Resources.Load<Sprite>("Cooking/UI_Sushi_Cooking_Box_Complete");
-
-                
-            }
-        
+                cooking_Box.sprite = Resources.Load<Sprite>("Cooking/UI_Sushi_Cooking_Box_Complete");              
+            }        
     }
 
     private void OnDisable()
@@ -71,17 +64,7 @@ public class Cook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (transform.parent.GetChild(0).gameObject == gameObject)
-        //{
-        //    fillGauge.fillAmount += Time.deltaTime * speed;
-
-        //    if (fillGauge.fillAmount >= 1)
-        //    {
-        //        cooking_Box.sprite = Resources.Load<Sprite>("Cooking/UI_Sushi_Cooking_Box_Complete");
-        //        test += 1;
-        //        fillGauge.fillAmount = 0.95f;
-        //    }
-        //}
+      
 
     }
 }

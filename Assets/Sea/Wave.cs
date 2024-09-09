@@ -19,72 +19,39 @@ public class Wave : MonoBehaviour
 
     private void FixedUpdate()
     {
-
-      
-
-        transform.position += Vector3.right * right_Speed * Time.deltaTime;
-
-
+        // 시간 
         time += Time.deltaTime;
 
-
+        // 오른쪽으로 이동 
+        transform.position += Vector3.right * right_Speed * Time.deltaTime;
+   
         if (time < 1.0f)
         {
             transform.position += Vector3.up * speed * Time.deltaTime;
         }
-        else if (time > 2.0f)
-        {
-            time = 0;
-        }
-
+        
         else if (time > 1.0f)
         {
             transform.position -= Vector3.up * speed * Time.deltaTime;
         }
 
-        if(transform.position.x >= 3.0f)
+        else if (time > 2.0f)
         {
-            Vector3 vector3 = prev_Position;
-
-            vector3.x = -3.9f;
-
-            transform.position = vector3;
+            time = 0;
         }
 
-
-
+        if (transform.position.x >= 3.0f)
+        {
+            Vector3 vector3 = prev_Position;
+            vector3.x = -3.9f;
+            transform.position = vector3;
+        }
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        //transform.position += Vector3.right * right_Speed * Time.deltaTime;
-
-
-
-
-        //time += Time.deltaTime;
-
-
-        //if(time < 1.0f)
-        //{
-        //    transform.position += Vector3.up * speed * Time.deltaTime;
-        //}
-        //else if (time > 2.0f)
-        //{
-        //    time = 0;
-        //}
-
-        //else if (time > 1.0f)
-        //{
-        //    transform.position -= Vector3.up * speed * Time.deltaTime;
-        //}
-
-
-
-
-
-
+        
 
     }
 }

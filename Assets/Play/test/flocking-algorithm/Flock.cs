@@ -11,7 +11,7 @@ public class Flock : MonoBehaviour
 
     [Range(1, 500)]
     public int startingCount = 250;
-    public float AgentDensity = 0.08f;
+     float AgentDensity = 0.08f;
 
     [Range(1f, 100f)]
     public float driveFactor = 10f;

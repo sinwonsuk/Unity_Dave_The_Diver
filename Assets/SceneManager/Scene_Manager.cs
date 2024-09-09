@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
-using static UnityEngine.Mesh;
+
 
 public class Scene_Manager : MonoBehaviour
 {
@@ -127,8 +127,6 @@ public class Scene_Manager : MonoBehaviour
         RenderSettings.fog = false;
     }
 
-
-
     public void Change_from_SushiBar_to_Sea()
     {
         scenesdictionary["Title"].SetActive(false);
@@ -141,9 +139,7 @@ public class Scene_Manager : MonoBehaviour
 
         if (newMaterial != null)
         {
-            sea_sky.material = newMaterial;
-            // 이게 낮나 아니면 그냥 인스팩터창에서 연결하는게 좋나? 
-            // scenesdictionary["Sea"].transform.Find("Canvas").FindChild("adadada");
+            sea_sky.material = newMaterial;           
         }
 
         sea_inventory_scroll.SetActive(false);
@@ -155,9 +151,6 @@ public class Scene_Manager : MonoBehaviour
 
         aftroon_or_night_Check = false;
     }
-
-
-
     public void TitleOn()
     {
         scenesdictionary["Title"].SetActive(true);      
@@ -165,37 +158,7 @@ public class Scene_Manager : MonoBehaviour
         scenesdictionary["Sea"].SetActive(false);
         scenesdictionary["Play"].SetActive(false);
         scenesdictionary["start_Scene"].SetActive(false);
-    }
-
-    //public void SushiBarOn()
-    //{
-    //    scenesdictionary["Title"].SetActive(false);
-    //    scenesdictionary["SushiBar"].SetActive(true);
-    //    scenesdictionary["Sea"].SetActive(false);
-    //    scenesdictionary["Play"].SetActive(false);
-    //}
-
-    //public void SeaOn()
-    //{       
-    //    scenesdictionary["Title"].SetActive(false);
-    //    scenesdictionary["SushiBar"].SetActive(false);
-    //    scenesdictionary["Sea"].SetActive(true);
-    //    scenesdictionary["Play"].SetActive(false);
-
-    //    RenderSettings.fog = false;
-    //}
-
-    //public void PlayOn()
-    //{
-    //    scenesdictionary["Title"].SetActive(false);
-    //    scenesdictionary["SushiBar"].SetActive(false);
-    //    scenesdictionary["Sea"].SetActive(false);
-    //    scenesdictionary["Play"].SetActive(true);
-
-    //    RenderSettings.fog = true;
-
-    //}
-
+    }  
     void OnApplicationQuit()
     {
        

@@ -18,6 +18,7 @@ public class Customer : MonoBehaviour
         Menu,
         Wait,
         Eat,
+        Emotion,
         Good,
         Anger,
         BackMove,
@@ -206,6 +207,135 @@ public class Customer : MonoBehaviour
         }
     }
 
+    void Custom_Fsm()
+    {
+        switch (state)
+        {
+            case Customer_State.Move:
+                {
+                    if (seat_Transform.anchoredPosition.x > rectTransform.anchoredPosition.x)
+                    {
+                        rectTransform.Translate(Vector2.right * Speed * Time.deltaTime);
+                    }
+                    else
+                    {
+                        int random = Random.Range(0, 2);
+
+                        if (random == 0)
+                        {
+                            Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.sushi_customer_enter_talk, false);
+                        }
+                        else
+                        {
+                            Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.sushi_customer_enter_talk_02, false);
+                        }
+
+                        animator.SetTrigger("Menu");
+                        state = Customer_State.Menu;
+                    }
+
+                }
+                break;
+            case Customer_State.Menu:
+                {
+                    time += Time.deltaTime;
+
+                    talk_Effect.SetActive(true);
+
+                    if (time > 2)
+                    {
+                        time = 0;
+
+                        talk_Effect.SetActive(false);
+                        animator.SetTrigger("Wait");
+                        Sushi_Info.SetActive(true);
+                        Menu_Choice();
+                        Cook_Make();
+
+
+                        state = Customer_State.Wait;
+                    }
+                }
+                break;
+            case Customer_State.Wait:
+                {
+                    wait_gauge.fillAmount += Time.deltaTime * 0.05f;
+
+                    if (wait_gauge.fillAmount >= 1)
+                    {
+                        Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.sushi_customer_enter_talk_03, false);
+                        Sushi_Info.SetActive(false);
+                        state = Customer_State.Emotion;
+                        animator.SetBool("Anger", true);
+                    }
+                }
+                break;
+            case Customer_State.Eat:
+                {
+                    time += Time.deltaTime;
+
+                    if (time >= 2)
+                    {
+                        Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.sound_sushibar_pay, false);
+                        time = 0;
+                        state = Customer_State.Emotion;
+                        animator.SetTrigger("Happy");
+                    }
+
+
+
+                }
+                break;
+            case Customer_State.Emotion:
+                {
+                    
+
+                    time += Time.deltaTime;
+
+                    AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+                   
+
+                    if(stateInfo.IsName("Customer_Happy"))
+                    {
+                        coin.SetActive(true);
+                    }
+                    else
+                    {
+
+                    }                
+                    if (time > 2.5)
+                    {
+                        animator.SetBool("Anger", false);
+
+                        time = 0;
+                        state = Customer_State.BackMove;
+                        animator.SetTrigger("Back_Move");
+                    }
+
+                }
+                break;                     
+            case Customer_State.BackMove:
+                {
+                    if (seat_Check == false)
+                    {
+                        customer_Seat_function(seat);
+                        seat_Check = true;
+                    }
+                    time += Time.deltaTime;
+                    rectTransform.localScale = new Vector3(-1, 1, 1);
+                    rectTransform.Translate(Vector2.left * Speed * Time.deltaTime);
+
+                    if (time > 3)
+                    {
+                        Destroy(gameObject);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+    }
       
         void Update()
         {
@@ -228,140 +358,8 @@ public class Customer : MonoBehaviour
                     Sushi_Info.SetActive(false);
                 }              
             }
-           }  
-         
-            switch (state)
-            {
-                case Customer_State.Move:
-                    {
-                        if (seat_Transform.anchoredPosition.x > rectTransform.anchoredPosition.x)
-                        {
-                            rectTransform.Translate(Vector2.right * Speed * Time.deltaTime);
-                        }
-                        else
-                        {   
-                            int random = Random.Range(0, 2);
-
-                            if(random == 0)
-                            {
-                                Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.sushi_customer_enter_talk, false);
-                            }
-                            else
-                            {
-                                Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.sushi_customer_enter_talk_02, false);
-                            }
-
-                            animator.SetTrigger("Menu");                          
-                            state = Customer_State.Menu;
-                        }
-
-                    }
-                    break;
-                case Customer_State.Menu:
-                    {
-                        time += Time.deltaTime;
-
-                        talk_Effect.SetActive(true);
-
-                        if (time > 2)
-                        {
-                            time = 0;
-
-                            talk_Effect.SetActive(false);
-                            animator.SetTrigger("Wait");
-                            Sushi_Info.SetActive(true);
-                            Menu_Choice();
-                            Cook_Make();
-
-
-                            state = Customer_State.Wait;
-                        }
-                    }
-                    break;
-                case Customer_State.Wait:
-                    {
-                        wait_gauge.fillAmount += Time.deltaTime*0.05f;
-
-                        if (wait_gauge.fillAmount >= 1)
-                        {
-                           Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.sushi_customer_enter_talk_03, false);
-                           Sushi_Info.SetActive(false);
-                           state = Customer_State.Anger;
-                           animator.SetBool("Anger", true);
-                        }
-                      
-
-
-                    }
-                    break;
-                case Customer_State.Eat:
-                {
-                   
-
-                    time += Time.deltaTime;
-
-                    if(time >=2)
-                    {
-                        Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.sound_sushibar_pay, false);
-                        time = 0;
-                        state = Customer_State.Good;
-                        animator.SetTrigger("Happy");
-                    }
-
-
-                }
-                    break;
-                case Customer_State.Good:
-                {
-
-                    time += Time.deltaTime;
-
-                    coin.SetActive(true);
-
-
-                    if (time > 2.5)
-                    {                       
-                        time = 0;
-                        state = Customer_State.BackMove;
-                        animator.SetTrigger("Back_Move");
-                    }
-
-                }
-                    break;
-                case Customer_State.Anger:
-                {
-
-                    time += Time.deltaTime;
-
-                    if (time >= 2)
-                    {
-                      
-                        time = 0;
-                        state = Customer_State.BackMove;
-                        animator.SetBool("Anger", false);                       
-                    }
-                }
-                break;
-                case Customer_State.BackMove:
-                {
-                    if(seat_Check ==false)
-                    {
-                        customer_Seat_function(seat);                                           
-                        seat_Check = true;
-                    }                                   
-                    time += Time.deltaTime;
-                    rectTransform.localScale = new Vector3(-1, 1, 1);
-                    rectTransform.Translate(Vector2.left * Speed * Time.deltaTime);
-
-                    if (time > 3)
-                    {
-                        Destroy(gameObject);
-                    }
-                }
-                    break;
-                default:
-                    break;
-            }
+           }
+             Custom_Fsm();
         }
 
     internal void Make_Prefab(Transform transform, RectTransform rectTransform, List<GameObject> menus, Transform cook_Transform_Parent, int seat, object v)

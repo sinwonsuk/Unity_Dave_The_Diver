@@ -105,7 +105,7 @@ public class Customer_Manager : MonoBehaviour
         }
     }
 
-    bool customer_Seat()
+    bool customer_Seat_Inspect()
     {
         while (true)
         {
@@ -179,7 +179,7 @@ public class Customer_Manager : MonoBehaviour
 
     }
 
-    void Random_Customer_Prefab()
+    void Random_Customer_Prefab_Creat()
     {
         if (random_Check == false)
         {
@@ -199,7 +199,8 @@ public class Customer_Manager : MonoBehaviour
             random_Customer_Prefab_time = 0;
 
             Randoms++;
-            if (customer_Seat() == true)
+
+            if (customer_Seat_Inspect() == true)
             {
                 customer.GetComponent<Customer>().Make_Prefab(transform, seat_Transforms[seat], menus, cook_Transform_Parent, seat, Customer_Seat_Check);
             }
@@ -219,15 +220,12 @@ public class Customer_Manager : MonoBehaviour
                     temp++;
                 }
             }
-
             if (temp == on_Seat.Length && close_Check == false)
             {
                 close_Start.SetActive(true);
                 close_Check = true;
-
             }
         }
-
     }
 
     void Customer_Come_Time()
@@ -254,7 +252,7 @@ public class Customer_Manager : MonoBehaviour
             return;
         }
       
-        Random_Customer_Prefab();
+        Random_Customer_Prefab_Creat();
         Customer_Come_Time();
     }
 }

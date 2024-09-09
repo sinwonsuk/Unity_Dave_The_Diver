@@ -134,9 +134,7 @@ public class Sushi_Inven_Manager : MonoBehaviour
 
                     recipe_Focus.Sushi_Icon_Move();
 
-
                     int _count = int.Parse(prefab[input].transform.Find("Sushi_Recipe_Info").Find("Meat_Count").GetComponent<TextMeshProUGUI>().text);
-
 
                     if (Input.GetKeyDown(KeyCode.Space) && _count>=1)
                     {

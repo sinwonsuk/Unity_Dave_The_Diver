@@ -75,10 +75,7 @@ public class Audio_Manager : MonoBehaviour
     }
 
     void Init()
-    {
-        
-
-
+    {       
         // 배경음 플레이어 초기화
         GameObject bgmObject = new GameObject("BGM");
         bgmObject.transform.parent = transform;    

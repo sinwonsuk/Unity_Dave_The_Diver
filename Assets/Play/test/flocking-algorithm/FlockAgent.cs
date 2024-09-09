@@ -59,19 +59,11 @@ public class FlockAgent : MonoBehaviour
         }
 
         if (collision.gameObject.tag == "Player")
-        {
-
-          
-                Vector3 MoveDir = transform.position - collision.transform.position;
-
-                run_Away = MoveDir.normalized;
-
-                flock_Collision = Flock_Collision.PlayerCollision;
-                time = 0;
-           
-
-
-           
+        {        
+            Vector3 MoveDir = transform.position - collision.transform.position;
+            run_Away = MoveDir.normalized;
+            flock_Collision = Flock_Collision.PlayerCollision;
+            time = 0;                    
         }
 
         if (collision.gameObject.tag == "OutCollison")
@@ -153,9 +145,6 @@ public class FlockAgent : MonoBehaviour
                         time = 0.0f;
                         flock_Collision = Flock_Collision.None;                     
                     }
-
-
-
                 }
                 break;
             default:

@@ -37,7 +37,6 @@ public class Sea_Slot : MonoBehaviour
     {
         Dictionary<string, Json_Manager.Fish> _fishDictionary  =Json_Manager.Get_Instance().GetFishList().fishDictionary;
 
-
         foreach (var fish in _fishDictionary)
         {
             if(fish.Value.today_count > 0)
@@ -50,20 +49,7 @@ public class Sea_Slot : MonoBehaviour
 
                 Instantiate(gameObject, _transformParent);
             }
-
-
-            
-
-
-            //string jsonData = JsonUtility.ToJson(Json_Manager.Get_Instance().GetFishList(), true);
-            //string path = Path.Combine(Application.dataPath + "/Resources", "test.json");
-            //File.WriteAllText(path, jsonData);
-
-           
-
         }
-
-
     }
    
     void Update()

@@ -41,7 +41,7 @@ public class Rope_Physics : MonoBehaviour
         {
             segments.Add(new Segment(segmentPos));
 
-            segmentPos.x -= segmentLength;
+            segmentPos.y -= segmentLength;
         }
     }
 
@@ -53,8 +53,7 @@ public class Rope_Physics : MonoBehaviour
 
         for (int i = 0; i < constraintLoop; i++)
         {
-           //ApplyConstraint();
-            AdjustCollision();
+           ApplyConstraint();      
         }     
 
         DrawPope();
@@ -89,6 +88,7 @@ public class Rope_Physics : MonoBehaviour
         for (int i = 0; i < segments.Count; i++)
         {
             segments[i].velocity = segments[i].position - segments[i].previousPos;
+            Debug.Log(segments[i].velocity);
             segments[i].previousPos = segments[i].position;
             segments[i].position += gravity * Time.fixedDeltaTime * Time.fixedDeltaTime;
             segments[i].position += segments[i].velocity;

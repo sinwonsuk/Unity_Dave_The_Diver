@@ -16,7 +16,8 @@ public class Json_Manager : MonoBehaviour
     {     
         if(json_Manager_Instance == null)
         {
-            json_Manager_Instance= FindObjectOfType<Json_Manager>();
+            json_Manager_Instance = FindObjectOfType<Json_Manager>();
+
         }
 
         return json_Manager_Instance;

@@ -76,12 +76,9 @@ public class Cook_Manager : MonoBehaviour
         }
 
     }
-    // Update is called once per frame
-    void Update()
+
+    void Sushi_Make()
     {
-
-        ServeSushiToDave();
-
         if (childindex == transform.childCount)
         {
             Audio_Manager.GetInstance().Sfx_Stop(Audio_Manager.sfx.effect_chopping_board);
@@ -90,45 +87,42 @@ public class Cook_Manager : MonoBehaviour
             return;
         }
 
-        if(audio_Check ==false)
+        if (audio_Check == false)
         {
             Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.effect_chopping_board, true);
             audio_Check = true;
         }
 
         banCho.SetBool("Work", true);
-             
-        if(transform.childCount > 0)
+
+        if (transform.childCount > 0)
         {
             transform.GetChild(childindex).GetComponent<Cook>().cook_FillAmount();
         }
-      
 
 
-     if(transform.GetChild(childindex).GetComponent<Cook>().Get_fillGauge().fillAmount >=1)
-     {
-           
-            int random = Random.Range(0,2);
 
-            if(random == 0)
+        if (transform.GetChild(childindex).GetComponent<Cook>().Get_fillGauge().fillAmount >= 1)
+        {
+
+            int random = Random.Range(0, 2);
+
+            if (random == 0)
             {
                 Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.sushi_bancho_foodready, false);
-            }         
+            }
             else
             {
                 Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.sushi_bancho_foodready_02, false);
             }
 
-
-
-
             childindex++;
-     }
+        }
+    }
 
-
-
-        
-
-
+    void Update()
+    {
+        ServeSushiToDave();
+        Sushi_Make();
     }
 }

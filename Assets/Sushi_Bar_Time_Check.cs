@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Sushi_Bar_Time_Check : MonoBehaviour
 {
     Image image;
-    // Start is called before the first frame update
+
 
     public float time {  get; set;} 
 
@@ -26,7 +26,6 @@ public class Sushi_Bar_Time_Check : MonoBehaviour
     void Update()
     {
         time = image.fillAmount;
-
 
         image.fillAmount += Time.deltaTime*0.005f;
 
