@@ -19,6 +19,9 @@ public class Cook_Manager : MonoBehaviour
     [SerializeField]
     GameObject dave_Sushi_Give;
 
+    [SerializeField]
+    GameObject cook_Perfab;
+
 
     GameObject dave_collision;
 
@@ -76,6 +79,21 @@ public class Cook_Manager : MonoBehaviour
         }
 
     }
+
+    public void Cook_Choice(int menu_Count_Check,List<Menu> menus,int menuindex)
+    {
+       
+        if (menu_Count_Check == menus.Count)
+        {
+            cook_Perfab.GetComponent<Cook>().Make_Prefap(transform, "Sushi/Sushi_Gim");
+        }
+        else
+        {
+            cook_Perfab.GetComponent<Cook>().Make_Prefap(transform, menus[menuindex].Get_sushi_path());
+        }
+   
+    }
+
 
     void Sushi_Make()
     {

@@ -11,6 +11,9 @@ public class Customer : MonoBehaviour
     public customer_Seat_Function customer_Seat_function;
 
     GameObject dave;
+
+    Cook_Manager cook_manager;
+
     enum Customer_State
     {
         Move,
@@ -19,8 +22,6 @@ public class Customer : MonoBehaviour
         Wait,
         Eat,
         Emotion,
-        Good,
-        Anger,
         BackMove,
     }
 
@@ -44,7 +45,7 @@ public class Customer : MonoBehaviour
     GameObject cook_Perfab;
 
 
-    Transform cook_Transform_Parent;
+
 
     [SerializeField]
     GameObject coin;
@@ -113,7 +114,7 @@ public class Customer : MonoBehaviour
     }
 
 
-    public void Make_Prefab(Transform ins_transform, RectTransform _Seat_transforms, List<GameObject> _menus,Transform _cook_Transform_Parent, int _Seat, customer_Seat_Function _customer_Seat_function)
+    public void Make_Prefab(Transform ins_transform, RectTransform _Seat_transforms, List<GameObject> _menus,Cook_Manager _cook_manager, int _Seat, customer_Seat_Function _customer_Seat_function)
     {
 
         GameObject customer = Instantiate(gameObject, ins_transform);
@@ -122,7 +123,7 @@ public class Customer : MonoBehaviour
 
         customer.GetComponent<Customer>().seat_Transform = _Seat_transforms;
 
-        customer.GetComponent<Customer>().cook_Transform_Parent = _cook_Transform_Parent;
+        customer.GetComponent<Customer>().cook_manager = _cook_manager;
 
         customer.GetComponent<Customer>().seat = _Seat; 
 
@@ -190,22 +191,22 @@ public class Customer : MonoBehaviour
         }
     }
 
-    void Cook_Make()
-    {
-        if (cook_Check == false)
-        {
-            if (menu_Count_Check == menus.Count)
-            {
-                cook_Perfab.GetComponent<Cook>().Make_Prefap(cook_Transform_Parent, "Sushi/Sushi_Gim");
-            }
-            else
-            {
-                cook_Perfab.GetComponent<Cook>().Make_Prefap(cook_Transform_Parent, menus[menuindex].Get_sushi_path());
-            }
+    //void Cook_Make()
+    //{
+    //    if (cook_Check == false)
+    //    {
+    //        if (menu_Count_Check == menus.Count)
+    //        {
+    //            cook_Perfab.GetComponent<Cook>().Make_Prefap(cook_Transform_Parent, "Sushi/Sushi_Gim");
+    //        }
+    //        else
+    //        {
+    //            cook_Perfab.GetComponent<Cook>().Make_Prefap(cook_Transform_Parent, menus[menuindex].Get_sushi_path());
+    //        }
 
-            cook_Check = true;
-        }
-    }
+    //        cook_Check = true;
+    //    }
+    //}
 
     void Custom_Fsm()
     {
@@ -250,7 +251,12 @@ public class Customer : MonoBehaviour
                         animator.SetTrigger("Wait");
                         Sushi_Info.SetActive(true);
                         Menu_Choice();
-                        Cook_Make();
+                        if(cook_Check ==false)
+                        {
+                            cook_manager.Cook_Choice(menu_Count_Check, menus, menuindex);
+                            cook_Check = true;
+                        }
+                        
 
 
                         state = Customer_State.Wait;
@@ -362,8 +368,5 @@ public class Customer : MonoBehaviour
              Custom_Fsm();
         }
 
-    internal void Make_Prefab(Transform transform, RectTransform rectTransform, List<GameObject> menus, Transform cook_Transform_Parent, int seat, object v)
-    {
-        throw new System.NotImplementedException();
-    }
+    
 }

@@ -8,7 +8,7 @@ public class Recipe_Focus : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    int input = 0;
+    public int input { get; set; }
 
     int CountY = 0;
 
@@ -23,6 +23,22 @@ public class Recipe_Focus : MonoBehaviour
     Vector2 start_pos = new Vector2();
 
     Vector2 vector2 = new Vector2();
+
+    public void Variable_Reset()
+    {
+        input = 0;
+
+        CountY = 0;
+
+        rangeX = 85f;
+
+        rangeY = 86f;
+
+
+        rectTransform.anchoredPosition = start_pos;
+        vector2 = start_pos;
+        PrevPos = start_pos;
+    }
 
     private void Move()
     {

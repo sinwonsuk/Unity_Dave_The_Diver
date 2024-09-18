@@ -6,7 +6,6 @@ using UnityEngine;
 public class Customer_Manager : MonoBehaviour
 {
 
-
     [SerializeField]
     List<RectTransform> seat_Transforms = new List<RectTransform>();
 
@@ -14,13 +13,14 @@ public class Customer_Manager : MonoBehaviour
     GameObject customer;
 
     [SerializeField]
-    Transform cook_Transform_Parent;
-
-    [SerializeField]
     Sushi_Bar_Time_Check sushi_Bar_Time_Check;
 
     [SerializeField]
     GameObject close_Start;
+
+    [SerializeField]
+    Cook_Manager cook_Manager;
+
 
     [SerializeField]
     List<GameObject> menus = new List<GameObject>();
@@ -202,7 +202,7 @@ public class Customer_Manager : MonoBehaviour
 
             if (customer_Seat_Inspect() == true)
             {
-                customer.GetComponent<Customer>().Make_Prefab(transform, seat_Transforms[seat], menus, cook_Transform_Parent, seat, Customer_Seat_Check);
+                customer.GetComponent<Customer>().Make_Prefab(transform, seat_Transforms[seat], menus, cook_Manager, seat, Customer_Seat_Check);
             }
         }
     }

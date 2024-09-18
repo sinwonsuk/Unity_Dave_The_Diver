@@ -1,35 +1,39 @@
 using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Xml.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.U2D;
 using UnityEngine.UI;
-using static Json_Manager;
-
 
 
 
 public class Slot : MonoBehaviour
 {
+    [SerializeField]
+    TextMeshProUGUI fish_name;
+    [SerializeField]
+    TextMeshProUGUI rank;
+    [SerializeField]
+    TextMeshProUGUI meat;
+    [SerializeField]
+    TextMeshProUGUI weight;
+    [SerializeField]
+    Image fish_image;
+
 
     public GameObject Create_Prefab(Dictionary<string, Json_Manager.Fish> _fishDictionary, string name,Transform _transform)
     {
         if(_fishDictionary.ContainsKey(name))                
         {
-            transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _fishDictionary[name].name;
-            transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _fishDictionary[name].rank;
-            transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = _fishDictionary[name].meat.ToString();
-            transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = _fishDictionary[name].weight;
+            fish_name.text = _fishDictionary[name].name;
+            rank.text = _fishDictionary[name].rank;
+            meat.text = _fishDictionary[name].meat.ToString();
+            weight.text = _fishDictionary[name].weight;
             _fishDictionary[name].count += 1;
             _fishDictionary[name].today_count += 1;
-            transform.GetChild(4).GetComponent<Image>().sprite = Resources.Load<Sprite>(_fishDictionary[name].picture);
+            fish_image.sprite = Resources.Load<Sprite>(_fishDictionary[name].picture);
             return Instantiate(gameObject, _transform);
-        }
-      
+        }     
         return null;
     }
 

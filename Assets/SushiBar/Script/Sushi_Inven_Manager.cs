@@ -150,7 +150,7 @@ public class Sushi_Inven_Manager : MonoBehaviour
 
                     else if (Input.GetKeyDown(KeyCode.C))
                     {
-                        Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.ui_button_click, false);
+                         Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.ui_button_click, false);
 
                         menuMove.Reverse_InvenChange();
 
@@ -170,7 +170,7 @@ public class Sushi_Inven_Manager : MonoBehaviour
                         if (Input.GetKeyDown(KeyCode.C))
                         {
                             Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.ui_button_click, false);
-
+                            recipe_Focus.Variable_Reset();
                             input = 0;
                             Destroy(temp);
 
