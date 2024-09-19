@@ -84,15 +84,13 @@ public class Scene_Manager : MonoBehaviour
         scenesdictionary["Sea"].SetActive(true);
         scenesdictionary["Play"].SetActive(false);
 
-
         Material newMaterial = Resources.Load<Material>("Sky/Night_Sky");
 
         if (newMaterial != null)
         {
-            sea_sky.material = newMaterial;
-            // 이게 낮나 아니면 그냥 인스팩터창에서 연결하는게 좋나? 
-            // scenesdictionary["Sea"].transform.Find("Canvas").FindChild("adadada");
+            sea_sky.material = newMaterial;        
         }
+
         Audio_Manager.GetInstance().SfxPlay(Audio_Manager.sfx.ui_lobby_open, false);
         sea_inventory_scroll.SetActive(true);
         sea_Night_Alpha.SetActive(true);

@@ -19,7 +19,7 @@ public class Customer_Manager : MonoBehaviour
     GameObject close_Start;
 
     [SerializeField]
-    Cook_Manager cook_Manager;
+    Cooking cooking;
 
 
     [SerializeField]
@@ -202,7 +202,7 @@ public class Customer_Manager : MonoBehaviour
 
             if (customer_Seat_Inspect() == true)
             {
-                customer.GetComponent<Customer>().Make_Prefab(transform, seat_Transforms[seat], menus, cook_Manager, seat, Customer_Seat_Check);
+                customer.GetComponent<Customer>().Make_Prefab(transform, seat_Transforms[seat], menus, cooking, seat, Customer_Seat_Check);
             }
         }
     }

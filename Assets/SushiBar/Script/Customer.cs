@@ -12,7 +12,7 @@ public class Customer : MonoBehaviour
 
     GameObject dave;
 
-    Cook_Manager cook_manager;
+    Cooking cooking;
 
     enum Customer_State
     {
@@ -114,7 +114,7 @@ public class Customer : MonoBehaviour
     }
 
 
-    public void Make_Prefab(Transform ins_transform, RectTransform _Seat_transforms, List<GameObject> _menus,Cook_Manager _cook_manager, int _Seat, customer_Seat_Function _customer_Seat_function)
+    public void Make_Prefab(Transform ins_transform, RectTransform _Seat_transforms, List<GameObject> _menus,Cooking _cook_manager, int _Seat, customer_Seat_Function _customer_Seat_function)
     {
 
         GameObject customer = Instantiate(gameObject, ins_transform);
@@ -123,7 +123,7 @@ public class Customer : MonoBehaviour
 
         customer.GetComponent<Customer>().seat_Transform = _Seat_transforms;
 
-        customer.GetComponent<Customer>().cook_manager = _cook_manager;
+        customer.GetComponent<Customer>().cooking = _cook_manager;
 
         customer.GetComponent<Customer>().seat = _Seat; 
 
@@ -253,7 +253,7 @@ public class Customer : MonoBehaviour
                         Menu_Choice();
                         if(cook_Check ==false)
                         {
-                            cook_manager.Cook_Choice(menu_Count_Check, menus, menuindex);
+                            cooking.Cook_Choice(menu_Count_Check, menus, menuindex);
                             cook_Check = true;
                         }
                         

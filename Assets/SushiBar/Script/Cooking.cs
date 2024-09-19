@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class Cook_Manager : MonoBehaviour
+public class Cooking : MonoBehaviour
 {
     // Start is called before the first frame update
 
