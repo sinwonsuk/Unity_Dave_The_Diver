@@ -34,7 +34,7 @@ public class Sea_Inven_Control : MonoBehaviour
 
     public void Slotopen()
     {
-        slot.GetComponent<Sea_Slot>().Make_Prefab(transformParent);
+        slot.GetComponent<Sea_Slot>().Make_Prefabs(transformParent);
     }
 
 

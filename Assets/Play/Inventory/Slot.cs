@@ -21,23 +21,31 @@ public class Slot : MonoBehaviour
     Image fish_image;
 
 
+
     public GameObject Create_Prefab(Dictionary<string, Json_Manager.Fish> _fishDictionary, string name,Transform _transform)
-    {
+    {       
         if(_fishDictionary.ContainsKey(name))                
         {
-            fish_name.text = _fishDictionary[name].name;
-            rank.text = _fishDictionary[name].rank;
-            meat.text = _fishDictionary[name].meat.ToString();
-            weight.text = _fishDictionary[name].weight;
-            _fishDictionary[name].count += 1;
-            _fishDictionary[name].today_count += 1;
-            fish_image.sprite = Resources.Load<Sprite>(_fishDictionary[name].picture);
-            return Instantiate(gameObject, _transform);
-        }     
+            GameObject slotobject = Instantiate(gameObject, _transform);
+            Json_Manager.Fish _fish = _fishDictionary[name];
+            Slot slot = slotobject.GetComponent<Slot>();
+            slot.init(_fish);
+
+            return slotobject;
+        }        
         return null;
     }
 
-
+    void init(Json_Manager.Fish _fish)
+    {                     
+            fish_name.text = _fish.name;
+            rank.text = _fish.rank;
+            meat.text = _fish.meat.ToString();
+            weight.text = _fish.weight;
+            _fish.count += 1;
+            _fish.today_count += 1;
+            fish_image.sprite = Resources.Load<Sprite>(_fish.picture);          
+    }
 
     void Start()
     {

@@ -142,6 +142,8 @@ public class Customer : MonoBehaviour
         }
     }
 
+
+
     void Menu_Choice()
     {
         if (one_Check == false)

@@ -13,10 +13,6 @@ public class In_The_Sea_Alpha : MonoBehaviour
     Color Color;
 
     
-
-    [SerializeField]
-    GameObject Slots;
-
     void Start()
     {
 
@@ -30,9 +26,7 @@ public class In_The_Sea_Alpha : MonoBehaviour
 
     private void OnDisable()
     {
-        RectTransform rectTransform = Slots.transform.parent.GetComponent<RectTransform>();
-        float temp = 850.0f;
-        rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, temp);      
+        
         image.color = new Color(1, 1, 1, 0);
         Color.a = 0;
         gameObject.SetActive(false);

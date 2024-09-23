@@ -840,6 +840,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abf0eb7322a39846ac16c518f97cba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sushi_Image: {fileID: 9187866321525303187}
+  sushi_Name: {fileID: 857897197479780367}
+  fish_happy: {fileID: 4270279755974041152}
+  fish_Count: {fileID: 8624003978685270268}
+  fish_Count_02: {fileID: 3249221140542756734}
+  Sushi_Price: {fileID: 5564226809221936156}
 --- !u!1 &6570023565720844392
 GameObject:
   m_ObjectHideFlags: 0

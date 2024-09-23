@@ -36,13 +36,12 @@ public class Cook : MonoBehaviour
     }
 
     public void Make_Prefap(Transform _cook_Transform_Parent, string path)
-    {
-        sushi_Sprite.sprite = Resources.Load<Sprite>(path);
-
+    {       
         GameObject instance = Instantiate(gameObject, _cook_Transform_Parent);
 
         instance.GetComponent<Cook>().sushiPath = path;
 
+        instance.GetComponent<Cook>().sushi_Sprite.sprite = Resources.Load<Sprite>(path);
     }
 
     public void cook_FillAmount()

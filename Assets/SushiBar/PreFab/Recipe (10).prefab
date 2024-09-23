@@ -865,7 +865,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -126, y: 132.2934}
+  m_AnchoredPosition: {x: -126, y: 304}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5878687089826911632
@@ -918,6 +918,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4871b320ad46810498ddbc2303a953b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sushi_Level: {fileID: 3573622884960637580}
+  sushi_file_path: {fileID: 2999660187972386908}
+  fish_count: {fileID: 8540859607493155680}
+  sushi_Name: {fileID: 1616116614430530307}
+  sushi_Level_02: {fileID: 8596685815215708404}
+  fish_price: {fileID: 5229808683101384508}
+  fish_happy: {fileID: 5122170839432195242}
+  fish_food: {fileID: 6116959147748545708}
+  sushi_file_path_02: {fileID: 645560271334622638}
+  fish_picture: {fileID: 5182318764519121787}
+  fish_count_02: {fileID: 7781285657304199698}
+  fish_name: {fileID: 8436950368120899941}
 --- !u!1 &3960039690305230985
 GameObject:
   m_ObjectHideFlags: 0

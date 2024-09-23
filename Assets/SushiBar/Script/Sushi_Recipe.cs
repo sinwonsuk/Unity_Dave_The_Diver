@@ -1,16 +1,17 @@
+using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static Json_Manager;
 
 public class Sushi_Recipe : MonoBehaviour
 {
-    // Start is called before the first frame update
+
 
     List<Vector2> list = new List<Vector2>();
-
-    //GameObject prefabInstance;
 
     float plusX = 85.0f;
     float plusY = 86.0f;
@@ -18,7 +19,30 @@ public class Sushi_Recipe : MonoBehaviour
     int plusCountX = -1;
     int plusCountY = 0;
 
-
+    [SerializeField]
+    TextMeshProUGUI sushi_Level;
+    [SerializeField]
+    Image sushi_file_path;
+    [SerializeField]
+    TextMeshProUGUI fish_count;
+    [SerializeField]
+    TextMeshProUGUI sushi_Name;
+    [SerializeField]
+    TextMeshProUGUI sushi_Level_02;
+    [SerializeField]
+    TextMeshProUGUI fish_price;
+    [SerializeField]
+    TextMeshProUGUI fish_happy;
+    [SerializeField]
+    TextMeshProUGUI fish_food;
+    [SerializeField]
+    Image sushi_file_path_02;
+    [SerializeField]
+    Image fish_picture;
+    [SerializeField]
+    TextMeshProUGUI fish_count_02;
+    [SerializeField]
+    TextMeshProUGUI fish_name;
 
     public void Make_PreFab(Transform _transform , List<GameObject> _PreFab)
     {
@@ -27,10 +51,8 @@ public class Sushi_Recipe : MonoBehaviour
             return;
         }
 
-        // ¿Ã«ÿ æ»µ  
         plusCountX = -1;
         plusCountY = 0;
-
 
         for (int i = 3; i < transform.childCount; i++)
         {
@@ -38,9 +60,6 @@ public class Sushi_Recipe : MonoBehaviour
 
             list.Add(temp);
         }
-
-       
-
 
         Dictionary<string, Json_Manager.Fish> fishDictionary = Json_Manager.Get_Instance().GetFishList().fishDictionary;
 
@@ -52,39 +71,44 @@ public class Sushi_Recipe : MonoBehaviour
             _PreFab.Add(prefabInstance);
 
 
-            if (plusCountX == -1)
-            {
-                for (int i = 0; i < prefabInstance.transform.childCount; i++)
-                {
-                    prefabInstance.transform.GetChild(i).gameObject.SetActive(true);
-                }
-            }
+            Sushi_Recipe sushi_Recipe = prefabInstance.GetComponent<Sushi_Recipe>();
+
+            sushi_Recipe.init(fish.Value);
+
+            //if (plusCountX == -1)
+            //{
+            //    for (int i = 0; i < prefabInstance.transform.childCount; i++)
+            //    {
+            //        prefabInstance.transform.GetChild(i).gameObject.SetActive(true);
+            //    }
+            //}
 
 
-            prefabInstance.GetComponent<RectTransform>().anchoredPosition = new Vector2(-126.0f, 304.0f);
+            //prefabInstance.GetComponent<RectTransform>().anchoredPosition = new Vector2(-126.0f, 304.0f);
 
-            prefabInstance.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = fish.Value.sushi_Level;
-            prefabInstance.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>(fish.Value.sushi_file_path);
 
-            prefabInstance.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = fish.Value.count.ToString();
-            prefabInstance.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = fish.Value.sushi_Name;
 
-            prefabInstance.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = fish.Value.sushi_Level;
-            prefabInstance.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = fish.Value.price;
-            prefabInstance.transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = fish.Value.happy;
-            prefabInstance.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text = fish.Value.food;
-
-            prefabInstance.transform.GetChild(8).GetComponent<Image>().sprite = Resources.Load<Sprite>(fish.Value.sushi_file_path);
-
-            {
-                prefabInstance.transform.GetChild(9).GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(fish.Value.picture);
-                prefabInstance.transform.GetChild(9).GetChild(1).GetComponent<TextMeshProUGUI>().text = fish.Value.count.ToString();
-                prefabInstance.transform.GetChild(9).GetChild(2).GetComponent<TextMeshProUGUI>().text = fish.Value.name;
-            }
 
             TransformCalculate(prefabInstance);
         }
 
+
+    }
+
+    void init(Json_Manager.Fish fish)
+    {
+        sushi_Level.text = fish.sushi_Level;
+        sushi_file_path.sprite = Resources.Load<Sprite>(fish.sushi_file_path);
+        fish_count.text = fish.count.ToString();
+        sushi_Name.text = fish.sushi_Name;
+        sushi_Level_02.text = fish.sushi_Level;
+        fish_price.text = fish.price;
+        fish_happy.text = fish.happy;
+        fish_food.text = fish.food;
+        sushi_file_path_02.sprite = Resources.Load<Sprite>(fish.sushi_file_path);
+        fish_picture.sprite = Resources.Load<Sprite>(fish.picture);
+        fish_count_02.text = fish.count.ToString();
+        fish_name.text = fish.name;
 
     }
 
@@ -114,22 +138,22 @@ public class Sushi_Recipe : MonoBehaviour
         prefabInstance.gameObject.GetComponent<RectTransform>().anchoredPosition = vector2;
 
 
-        int ad = 0;
+        int index = 0;
 
         for (int i = 3; i < transform.childCount; i++)
         {
-            Vector2 vector = list[ad];
+            Vector2 vector = list[index];
 
             if (plusCountX > 3)
             {
                 vector.y += plusY * plusCountY;
-                vector.x = list[ad].x;
+                vector.x = list[index].x;
             }
             else
             {
                 vector.x -= plusX * plusCountX;
             }
-            ad += 1;
+            index += 1;
             prefabInstance.transform.GetChild(i).gameObject.GetComponent<RectTransform>().anchoredPosition = vector;
         }
 

@@ -50,40 +50,37 @@ public class Sushi_Slot : MonoBehaviour
     }
 
     public void Make_PreFab(string _Name,Transform _transform, ref GameObject temp)
-    {
-        
-
+    {       
         Dictionary<string, Json_Manager.Fish> fishDictionary = Json_Manager.Get_Instance().GetFishList().fishDictionary;
 
-        foreach (var fish in fishDictionary)
+        if(fishDictionary.ContainsKey(_Name)) 
         {
-            if (fish.Key == _Name)
-            {
+            GameObject _gameObject = Instantiate(gameObject, _transform);
 
-                Fish_Sprite.sprite = Resources.Load<Sprite>(fish.Value.picture);
-                Sushi_Sprite.sprite = Resources.Load<Sprite>(fish.Value.sushi_file_path);
-                Fish_Name.text = fish.Value.name;
-                Sushi_Count.text = fish.Value.count.ToString();
-                Make_Count_02.text = count.ToString();
-                Make_Count.text = count.ToString();
-                Make_Count_03.text = count.ToString();
-                Sushi_Name.text = fish.Value.sushi_Name;
-                Instance = Instantiate(gameObject, _transform);
+            Sushi_Slot sushi_Slot = _gameObject.GetComponent<Sushi_Slot>();
 
+            Json_Manager.Fish fish = fishDictionary[_Name];
 
-                temp = Instance;
-                return;
-            }
+            sushi_Slot.init(fish);
+                  
+            temp = _gameObject;
+
+            return;
         }
-
-
-        //if (fishDictionary.keys == name)
-        //{
-
-
-        //}
+   
     }
 
+    void init(Json_Manager.Fish fish)
+    {
+        Fish_Sprite.sprite = Resources.Load<Sprite>(fish.picture);
+        Sushi_Sprite.sprite = Resources.Load<Sprite>(fish.sushi_file_path);
+        Fish_Name.text = fish.name;
+        Sushi_Count.text = fish.count.ToString();
+        Make_Count_02.text = count.ToString();
+        Make_Count.text = count.ToString();
+        Make_Count_03.text = count.ToString();
+        Sushi_Name.text = fish.sushi_Name;
+    }
 
     private void Start()
     {

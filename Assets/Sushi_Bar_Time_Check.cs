@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class Sushi_Bar_Time_Check : MonoBehaviour
 {
     Image image;
-
-
+    float close = 0.383f;
+    float speed = 0.005f;
     public float time {  get; set;} 
 
 
@@ -27,13 +27,11 @@ public class Sushi_Bar_Time_Check : MonoBehaviour
     {
         time = image.fillAmount;
 
-        image.fillAmount += Time.deltaTime*0.005f;
+        image.fillAmount += Time.deltaTime* speed;
 
-        if(image.fillAmount > 0.383)
+        if(image.fillAmount > close)
         {
-            image.fillAmount = 0.383f;
+            image.fillAmount = close;
         }
-
-
     }
 }

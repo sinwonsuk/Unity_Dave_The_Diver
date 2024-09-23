@@ -27,7 +27,7 @@ public class Customer_Manager : MonoBehaviour
 
     float customer_come_time = 0;
     float random_Customer_Prefab_time = 0;
-
+    float closetime = 0.383f;
 
     public int[] Get_on_Seat()
     {
@@ -209,7 +209,7 @@ public class Customer_Manager : MonoBehaviour
 
     void close()
     {
-        if (sushi_Bar_Time_Check.time > 0.38f)
+        if (sushi_Bar_Time_Check.time > closetime)
         {
             int temp = 0;
 

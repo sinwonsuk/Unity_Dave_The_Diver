@@ -5,9 +5,24 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static Json_Manager;
 public class Today_Sushi_Menu_Info : MonoBehaviour
 {
     GameObject Instance;
+
+    [SerializeField]
+    Image sushi_Image;
+    [SerializeField]
+    TextMeshProUGUI sushi_Name;
+    [SerializeField]
+    TextMeshProUGUI fish_happy;
+    [SerializeField]
+    TextMeshProUGUI fish_Count;
+    [SerializeField]
+    TextMeshProUGUI fish_Count_02;
+    [SerializeField]
+    TextMeshProUGUI Sushi_Price;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,42 +38,44 @@ public class Today_Sushi_Menu_Info : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    void init(Json_Manager.Fish fish, int _count)
+    {
+        sushi_Image.sprite = Resources.Load<Sprite>(fish.sushi_file_path);
+        sushi_Name.text = fish.sushi_Name;
+        fish_happy.text = fish.happy;
+        fish_Count.text = _count.ToString();
+        fish_Count_02.text = _count.ToString();  
+        int temp = int.Parse(fish.price);
+        int Money = temp * _count;
+        Sushi_Price.text = Money.ToString();
+        //string jsonData = JsonUtility.ToJson(Json_Manager.Get_Instance().GetFishList(), true);
+        //string path = Path.Combine(Application.dataPath + "/Resources", "test.json");
+        //File.WriteAllText(path, jsonData);
+        return;
+
+    }
     public void Make_PreFab(string _Name, Transform _transform, int _count)
     {
 
 
         Dictionary<string, Json_Manager.Fish> fishDictionary = Json_Manager.Get_Instance().GetFishList().fishDictionary;
 
-        foreach (var fish in fishDictionary)
+
+        if(fishDictionary.ContainsKey(_Name)) 
         {
-            if (fish.Key == _Name)
-            {
-                transform.Find("Sushi_Picture").gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(fish.Value.sushi_file_path);
-                transform.Find("Sushi_Name").gameObject.GetComponent<TextMeshProUGUI>().text = fish.Value.sushi_Name;
-                transform.Find("Sushi_Happy").gameObject.GetComponent<TextMeshProUGUI>().text = fish.Value.happy;
-                transform.Find("Sushi_Count").gameObject.GetComponent<TextMeshProUGUI>().text = _count.ToString();
-                transform.Find("Sushi_Count_02").gameObject.GetComponent<TextMeshProUGUI>().text = _count.ToString();
+            GameObject _gameObject = Instantiate(gameObject, _transform);
 
-                int temp = int.Parse(fish.Value.price);
+            Today_Sushi_Menu_Info today_Sushi_Menu_Info = _gameObject.GetComponent<Today_Sushi_Menu_Info>();
 
-                int Money = temp * _count;
+            Json_Manager.Fish fish = fishDictionary[_Name];
 
-                transform.Find("Sushi_Price").gameObject.GetComponent<TextMeshProUGUI>().text = Money.ToString();
-                Instance = Instantiate(gameObject, _transform);
-
-                //string jsonData = JsonUtility.ToJson(Json_Manager.Get_Instance().GetFishList(), true);
-                //string path = Path.Combine(Application.dataPath + "/Resources", "test.json");
-                //File.WriteAllText(path, jsonData);
-
-                return;
-            }
+            today_Sushi_Menu_Info.init(fish, _count);
+            return;
         }
 
-
-        //if (fishDictionary.keys == name)
-        //{
-
-
-        //}
+        
+                
+       
     }
 }

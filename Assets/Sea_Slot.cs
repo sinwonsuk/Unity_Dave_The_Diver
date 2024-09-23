@@ -4,6 +4,7 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static Json_Manager;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 public class Sea_Slot : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class Sea_Slot : MonoBehaviour
         
     }
 
-    public void Make_Prefab(Transform _transformParent)
+    public void Make_Prefabs(Transform _transformParent)
     {
         Dictionary<string, Json_Manager.Fish> _fishDictionary  =Json_Manager.Get_Instance().GetFishList().fishDictionary;
 
@@ -41,17 +42,24 @@ public class Sea_Slot : MonoBehaviour
         {
             if(fish.Value.today_count > 0)
             {
-                fish_Sprite.sprite = Resources.Load<Sprite>(fish.Value.picture);
-                sushi_Sprite.sprite = Resources.Load<Sprite>(fish.Value.sushi_file_path);
-                fish_Name.text = fish.Value.name;
-                money.text = fish.Value.price;
-                meat.text = fish.Value.today_count.ToString();
+                GameObject slotobject = Instantiate(gameObject, _transformParent);
 
-                Instantiate(gameObject, _transformParent);
+                Sea_Slot slot = slotobject.GetComponent<Sea_Slot>();
+
+                slot.Init(fish.Value);              
             }
         }
     }
-   
+
+    void Init(Json_Manager.Fish _fish)
+    {
+        fish_Sprite.sprite = Resources.Load<Sprite>(_fish.picture);
+        sushi_Sprite.sprite = Resources.Load<Sprite>(_fish.sushi_file_path);
+        fish_Name.text = _fish.name;
+        money.text = _fish.price;
+        meat.text = _fish.today_count.ToString();
+    }
+
     void Update()
     {
         

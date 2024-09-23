@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static Json_Manager;
 public class Menu : MonoBehaviour
 {
 
@@ -59,24 +60,27 @@ public class Menu : MonoBehaviour
     {
 
         Dictionary<string, Json_Manager.Fish> fishDictionary = Json_Manager.Get_Instance().GetFishList().fishDictionary;
-
-        foreach (var fish in fishDictionary)
+     
+        if(fishDictionary.ContainsKey(_Name))
         {
-            if (fish.Key == _Name)
-            {
-               
-                sushi_Sprite.sprite = Resources.Load<Sprite>(fish.Value.sushi_file_path);
-                text_Count.text = _Count.ToString();
-                sushi_Count.text = _Count.ToString();
-                GameObject instance = Instantiate(gameObject, _transform);
-
-                instance.GetComponent<Menu>().count = _Count;
-                instance.GetComponent<Menu>().sushi_path = fish.Value.sushi_file_path;
-
-                return;
-            }
+            GameObject instance = Instantiate(gameObject, _transform);
+            Menu menu = instance.GetComponent<Menu>();
+            Json_Manager.Fish fish = fishDictionary[name];
+            menu.Init(fish, _Count);      
+            return;
         }
+        
     }
+
+    void Init(Json_Manager.Fish fish,int _count)
+    {
+        sushi_Sprite.sprite = Resources.Load<Sprite>(fish.sushi_file_path);
+        text_Count.text = _count.ToString();
+        sushi_Count.text = _count.ToString();
+        count = _count;
+        sushi_path = fish.sushi_file_path;
+    }
+
         // Start is called before the first frame update
         void Start()
     {
